@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{%  load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('MMUSDA site admin') }}{% endblock %}
+
+{% block branding %}
+<img id = "logo" src = "{% block logo %}{% static "admin/img/logo2.png" %} {% endblock %}" alt="Church Logo">
+
+<h1 id="site-name"><a href="{% url 'admin:index' %}">MMUSDA Site Administration</a></h1>
+
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

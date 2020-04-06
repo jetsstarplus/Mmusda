@@ -1,0 +1,183 @@
+{% include './cn/head.html' %} 
+
+<body>
+{% load static %}
+    {% include './cn/header.html' %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">About Us
+                    <small>Meet Our Team</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'sda:index' %}">Home</a>
+                    </li>
+                    <li class="active">About Us</li>
+                </ol>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <img class="img-responsive" src="{% static 'sda/img/logo.png' %}">
+            </div>
+            <div class="col-md-6">
+                {% if about %}
+                    <h2>Welcome to MMU SDA Church</h2>
+                        {% for ab in about %}
+                            <p>{{ ab.content }}</p>
+                        {% endfor %}
+                {% endif %}
+            </div>
+           
+        </div>
+
+        <!-- Team Member Profiles -->
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h2 class="page-header">Meet Our Team Members</h2>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Lawrence Kamau
+                    <small>1<sup>st</sup> Elder</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Oloo Edwin
+                    <small>Elder</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Benjamin Elmard
+                    <small>Elder</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Patric Ndungu
+                    <small>Elder</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Alfred Kioko
+                    <small>Church Clerk</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Helen Ongeni
+                    <small>Treasurer</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Gerald Mirambo
+                    <small>Head Deacon</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Vanessa Abuga
+                    <small>Head Deaconess</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
+                <h3>Mercy Chepchirchir
+                    <small>Sabbath School supretendant</small>
+                </h3>
+                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
+            </div>
+
+        </div>
+
+        <!-- Our Customers -->
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h2 class="page-header">Family heads</h2>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
+                <p>nihil reprehenderit quam iure.</p>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
+                <p>nihil reprehenderit quam iure.</p>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
+                <p>nihil reprehenderit quam iure.</p>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
+                
+                <p>nihil reprehenderit quam iure.</p>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
+                
+                <p>nihil reprehenderit quam iure.</p>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
+                
+                <p>nihil reprehenderit quam iure.</p>
+            </div>
+
+        </div>
+
+    </div>
+    
+    {% include './cn/footer.html' %}
+    
+    <!-- JavaScript -->
+     {% include './cn/tail.html' %}
+    
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MMUSDA | Login To Your missions Account</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href=" {% static 'sda/img/adventist-Logo.png' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {% static 'mission/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'mission/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('{% static "sda/img/adventist-Logo.png" %}');">
+			<div class="wrap-login100">
+				<form class="login100-form" method = 'POST'>
+                    {% csrf_token %}
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Create An Account
+					</span>
+
+					{{ form | crispy }}
+					<div class="contact100-form-checkbox">
+						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+						<label class="label-checkbox100" for="ckb1">
+							Remember me
+						</label>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type = 'submit' style="margin-left:1px">
+							Signin
+                        </button>
+                        <a href = "{% url 'login'%}" class = 'login100-form-btn'>
+							Login
+                        </a>
+					</div>
+					
+
+					<div class="text-center p-t-90">
+						<a class="txt1" href="{% url 'reset' %}">
+							Forgot Password?
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'mission/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'mission/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'mission/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'mission/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'mission/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'mission/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'mission/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'mission/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'mission/js/main.js' %}"></script>
+
+</body>
+</html>

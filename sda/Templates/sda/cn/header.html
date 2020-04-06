@@ -1,0 +1,59 @@
+{% load static %}
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height: 80px">
+    <div class="container">
+        <div class="navbar-header contain">
+            <button type="button" class="navbar-toggle but" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+            <a class="navbar-brand anchor" href="{% url 'sda:index' %}" >
+                <img src="{% static 'sda/img/adventist-Logo.png' %}" style="width: 60px; border-radius:2px;">
+                Multimedia University
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse" style="padding-top: 1em background-color: #000">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'sda:index' %}">Home</a>
+                </li>
+                <li><a href="{%url 'sda:services'  %}">Services</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Departments <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href=" {% url 'sda:dept_inside_activities' %}">Internal Activities</a><!-- Lawrence Kamau -->
+                        </li>
+                        <li><a href="{% url 'sda:dept_members_welfare' %}">Members Welfare</a><!-- Edwin Oloo -->
+                        </li>
+                        <li><a href="{% url 'sda:dept_church_affairs' %}">Church Affairs</a><!-- Elmard Benjamin -->
+                        </li>
+                        <li><a href="{% url 'sda:dept_ministries_outreach' %}">Ministries &amp; Outreach</a> <!-- Patric Ndung'u -->
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activities <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'sda:announcements' %}">Announcements</a></li>
+                        <li><a href="{% url 'sda:sermons' %}">Sermons</a></li>
+                        <li><a href="{% url 'sda:timeline' %}">Timeline</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'sda:about' %}">About</a></li>
+                        <li><a href="{% url 'sda:contact' %}">Contact</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'mission:home' %}">Mission</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>

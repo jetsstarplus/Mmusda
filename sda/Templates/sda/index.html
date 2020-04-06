@@ -1,0 +1,198 @@
+{% include './cn/head.html' %} 
+
+<body>
+{% load static %}
+    {% include './cn/header.html' %}
+
+    {% include './cn/carousel.html' %}
+  
+
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <h3><i class="fa fa-check-circle"></i> Welcome to Our Service</h3>
+                    <p>We all long to have the love of Christ, Christ shares His love through our day to day services. As a church we invite you to join us each and every day in our services.</p>
+                    <a href="#" class="btn btn-primary">Services</a>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h3><i class="fa fa-pencil"></i> Join Our Families</h3>
+                    <p>We all have families back at home, even in MMUSDA we have a home where there are families. Welcome to MMUSDA where families share the love of God and creating the warmth in our lives </p>
+                    <a href="#" class="btn btn-primary">Families & Departments</a>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h3><i class="fa fa-folder-open"></i> Get to Know Our Calendar</h3>
+                    <p>This site has the events of the semister, all the programs are listed. all are welcome to attend and participate in the activities that are in this semister...</p>
+                    <a href="#" class="btn btn-primary">Calendar & Events</a>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    <div class="section-colored text-center">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="center-20px" style="font-family: serif;font-size: 17px;">
+                    <h2>Theme Scripture This Semester <small>Word From The Wise</small></h2>
+                    {% if scripture %}
+                        {% for scr in scripture %}
+                            <strong>{{ scr.attached_verses}}</strong>
+                            <p style="font-style: oblique;"><b>"{{ scr.scripture_content}}"</b></p>
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section-colored -->
+
+    <div class="section">
+
+        <div class="container">
+
+            {% if event %}
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>SDA Family Events</h2>
+                    <hr>
+                </div>
+                {% for item in event %}
+                    <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
+                        <a href="{% url 'sda:item' %}">
+                            <img class="img-responsive img-home-portfolio" src="{% static 'item.image_link' %}">
+                        </a>
+                    </div>
+                {% endfor %}
+                <!-- <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
+                    <a href="{% url 'sda:item' %}">
+                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d2.jpg' %}">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
+                    <a href="{% url 'sda:item' %}">
+                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d3.jpg' %}">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
+                    <a href="{% url 'sda:item' %}">
+                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d4.jpg' %}">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
+                    <a href="{% url 'sda:item' %}">
+                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d5.jpg' %}">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
+                    <a href="{% url 'sda:item' %}">
+                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d1.jpg' %}">
+                    </a>
+                </div>
+            </div> -->
+
+            {% endif %}
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    <div class="section-colored">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <img class="img-responsive img-other" src="{% static 'sda/img/d1.jpg' %}">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2>Latest Annoncements and Updates</h2>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section-colored -->
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="row">
+                {% if other_bussinesses %}
+                <div class="col-lg-12 text-center">
+                    <h2>Other Businesses</h2>
+                        {% for other in other_bussinesses %}
+                        
+                             <p style="font: inherit">{{ other.other_description }}</p>    
+                        {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    <div class="container">
+
+        <div class="row well">
+            {% if visitor_word %}
+                <div class="col-lg-12">
+                    {% for word in visitor_word %}
+                        <h4 class="page-title">{{ word.title}}</h4>
+                        <p> {{ word.content }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    {% include './cn/footer.html' %}
+   
+    {% include './cn/tail.html' %}
+    <!-- JavaScript -->
+   
+
+</body>
+
+</html>

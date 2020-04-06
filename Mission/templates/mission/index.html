@@ -1,0 +1,161 @@
+{% extends './base.html'%}
+{% load static %}
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active">Dashboard</li>
+{% endblock %}
+{% block index %}
+
+    <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+
+
+            <!-- TABLE: LATEST ORDERS -->
+            <div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title">Latest Applications</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0 m-4">
+                <div class="table-responsive">
+                  <table class="table m-2">
+                    <thead>
+                    <tr>
+                      <th>Order Application</th>
+                      <th>Name</th>
+                      <th>Status</th>
+                      <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                      <td>Alex</td>
+                      <td><span class="badge badge-success">Good</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                      <td>Mark</td>
+                      <td><span class="badge badge-warning">Bad</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="{% static 'mission/pages/examples/invoice.html' %}">OR7429</a></td>
+                      <td>Jane</td>
+                      <td><span class="badge badge-danger">
+                          Average</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="{% static 'mission/pages/examples/invoice.html' %]">OR7429</a></td>
+                      <td>Mark</td>
+                      <td><span class="badge badge-info">Very Good</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="{% static 'mission/pages/examples/invoice.html' %}">OR1848</a></td>
+                      <td>Malcom</td>
+                      <td><span class="badge badge-warning">Very Bad</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="{% static 'mission/pages/examples/invoice.html' %}">OR7429</a></td>
+                      <td>Jane</td>
+                      <td><span class="badge badge-danger">Good</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="{% static 'mission/pages/examples/invoice.html' %}">OR9842</a></td>
+                      <td>Stephen</td>
+                      <td><span class="badge badge-success">Good</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Make an Application</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Applications</a>
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+
+
+            <div class="card col-md-4 p-6 m-4">
+                    <!-- Info Boxes Style 2 -->
+                    <div class="info-box mb-3 bg-warning">
+                      <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Todays Applicants</span>
+                        <span class="info-box-number">020</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-success">
+                      <span class="info-box-icon"><i class="far fa-heart"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Successfully analysed</span>
+                        <span class="info-box-number">92,050</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-danger">
+                      <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Downloads</span>
+                        <span class="info-box-number">114,381</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                    <div class="info-box mb-3 bg-info">
+                      <span class="info-box-icon"><i class="far fa-comment"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Direct Messages</span>
+                        <span class="info-box-number">163,921</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+
+                  </div>
+        </div>
+
+
+
+{% endblock %}

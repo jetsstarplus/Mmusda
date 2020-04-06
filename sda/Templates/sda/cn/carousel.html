@@ -1,0 +1,40 @@
+{% load static %}
+<div id="myCarousel" class="carousel slide" style="height: 500px">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image:url('{% static 'sda/img/3am.jpg' %}');"></div>
+                <div class="carousel-caption" style="background-color: #ffffff98; font-family: serif;color: #3896ad; text-align: center;">
+                    <h1>Welcome<br> to<br> <img class="col-lg-6 col-md-6 col-sm-4" src="{% static 'sda/img/logo2.png' %}" style="padding: 8px; width: 200px;"><br>Multimedia universty<br>Home of Service to God</h1>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url({% static 'sda/img/d6.jpg' %});"></div>
+                <div class="carousel-caption">
+                    <h1>Ready to Learn &amp; Connect with God</h1>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url({% static 'sda/img/d8.jpg' %});"></div>
+                <div class="carousel-caption">
+                    <h1>Get A Whole Lot of Teachings Directly from The Bible
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </div>

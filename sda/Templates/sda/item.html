@@ -1,0 +1,87 @@
+{% include './cn/head.html' %} 
+
+<body>
+{% load static %}
+    {% include './cn/header.html' %}
+
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">Event Name
+                    <small>Short Description</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'sda:index' %}">Home</a>
+                    </li>
+                    <li class="active">This Event</li>
+                </ol>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <img class="img-responsive" src="{% static 'sda/img/d6.jpg' %}" style="width: 700px">
+            </div>
+
+            <div class="col-md-4">
+                <h3>Finalist sabbath</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+                <h3>Event Details</h3>
+                <ul>
+                    <li>Lorem Ipsum</li>
+                    <li>Dolor Sit Amet</li>
+                    <li>Consectetur</li>
+                    <li>Adipiscing Elit</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Events</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive img-customer img-other" src="{% static 'sda/img/d5.jpg' %}">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive img-customer img-other" src="{% static 'sda/img/d4.jpg' %}">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive img-customer img-other" src="{% static  'sda/img/d6.jpg' %}">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive img-customer img-other" src="{% static 'sda/img/d1.jpg' %}">
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+    {% include './cn/footer.html' %}
+   
+    {% include './cn/tail.html' %}
+    <!-- JavaScript -->
+  
+
+</body>
+
+</html>
