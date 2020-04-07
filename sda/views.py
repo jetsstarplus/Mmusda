@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views import generic
 from . import models
@@ -23,8 +23,16 @@ def Index(request):
     
 
 
-def Event(request):
-    return render(request,'sda/item.html')
+def Event(request, event_id):    
+    item = get_object_or_404(models.Event, pk = event_id)
+    otheritem = models.Event.objects.exclude(pk = event_id).order_by('-pub_date')[:4]
+    details = models.EventsDetail.objects.filter(event = event_id).all()
+    context = {
+        'item':item,
+        'otheritem':otheritem,
+        'details':details
+    }
+    return render(request, 'sda/item.html', context)
 
 
 def services(request):
@@ -43,7 +51,16 @@ def dept_ministries_outreach(request):
     return render(request, 'sda/dept_ministries_outreach.html')
 
 def announcements(request):
-    return render(request, 'sda/announcements.html')
+    ann = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')
+    ann2 = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:1]
+    sub = models.Announcement.objects.filter(announcement_classification__startswith = 'Sub')
+
+    context = {
+        'ann': ann,
+        'sub':sub,
+        'ann2':ann2
+    }
+    return render(request, 'sda/announcements.html', context)
 
 
 def sermons(request):
@@ -65,6 +82,7 @@ def contact(request):
 class FAQView(generic.ListView):
     template_name = "sda/faq.html"
     context_object_name = 'faq'
+
     """Returning the  last faq"""
     def get_queryset(self):
         return models.faq.objects.order_by('-pub_date')[:10]

@@ -16,7 +16,7 @@ urlpatterns =[
     path('sermons/', views.sermons, name = 'sermons'),
     path('timeline/', views.timeline, name = 'timeline'),
     path('contact/', views.contact, name = 'contact'),
-    path('Event/', views.Event, name = 'item'),
+    path('item/<int:event_id>/', views.Event, name = 'item'),
     path('faq/', views.FAQView.as_view(), name = 'FAQ'),
      
 ]

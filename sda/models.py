@@ -37,13 +37,17 @@ class Church_leader(models.Model):
 
 
 class Announcement(models.Model):
+    status_choice = [
+        ('Announcement', 'Announcement'),
+        ('Sub-Announcement', 'Sub-Announcement')
+    ]
     announcement_title = models.CharField(max_length = 30)
     announcement_description = models.TextField()
     announcement_due_date = models.DateTimeField('Due Date')
     publication_date = models.DateTimeField('Date Published', default = timezone.now())
     user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
-    announcement_classification = models.CharField(max_length = 30, default = "None")
-    announcement_specification = models.CharField(max_length = 30, default = "None")
+    announcement_classification = models.CharField(max_length = 30, choices = status_choice)
+    announcement_specification = models.CharField(max_length = 100, default = "None")
 
     def __str__(self):
         return self.announcement_title
@@ -51,7 +55,7 @@ class Announcement(models.Model):
         #check if indeed the date is due
     def is_date_due(self):
         now = timezone.now()
-        return now-datetime.timedelta(days = 14) <= self.announcement_due_date <= now
+        return now-datetime.timedelta(days = 14) <= self.announcement_due_date >= now
     
 
     #justification if the date was indeed due
@@ -120,7 +124,7 @@ class Event(models.Model):
     event_name = models.CharField(max_length= 50)
     due_date = models.DateTimeField('Due Date')
     description = models.TextField()
-    image_link = models.ImageField()#upload_to = '/events')
+    image_link = models.ImageField(upload_to = 'sda')
     pub_date = models.DateTimeField('Publication Date', default = timezone.now())
     family_id = models.ForeignKey(Family, on_delete = models.CASCADE)
 
@@ -135,7 +139,7 @@ class Event(models.Model):
     #check if indeed the date is due
     def is_date_due(self):
         now = timezone.now()
-        return now-datetime.timedelta(days = 14) <= self.due_date <= now
+        return now-datetime.timedelta(days = 14) <= self.due_date >= now
     
 
     #justification if the date was indeed due
@@ -152,7 +156,7 @@ class Event(models.Model):
 
 # this model holds the details of the events described above
 class EventsDetail(models.Model):
-    event_id = models.ForeignKey(Event, on_delete = models.CASCADE)
+    event = models.ForeignKey(Event, on_delete = models.CASCADE)
     sub_title = models.CharField(max_length = 50)
     detail = models.CharField(max_length = 200)
     

@@ -184,17 +184,17 @@ class announcement(admin.ModelAdmin):
         ('Due Date', {'fields': ['announcement_due_date']}),
         (None, {'fields': ['publication_date']}),
         ('Posted By', {'fields': ['user_id']}),
-        ('Advanced Options', { 'classes':['collapse',],'fields': ['announcement_classification']}), 
-        ('Advanced Options', {'classes': ['collapse',],'fields': ['announcement_specification']})
+        ('Advanced Options', {'fields': ['announcement_classification']}), 
+        ('Advanced Options', {'fields': ['announcement_specification']})
     ]
     def created_by(self, obj):
         return ("%s " % (obj.user_id))
 
     created_by.short_description = "Posted By"
 
-    list_filter = ['announcement_due_date', 'announcement_title', 'publication_date']
+    list_filter = ['announcement_due_date', 'announcement_classification', 'publication_date']
     search_fields = ['announcement_due_date', 'announcement_title']
-    list_display = ['announcement_title', 'is_date_due', 'created_by', 'was_published_recently']
+    list_display = ['announcement_title', 'is_date_due', 'created_by', 'was_published_recently', 'announcement_classification']
 
 admin.site.register(models.Announcement, announcement)
 

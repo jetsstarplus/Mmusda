@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('sda.urls')),
@@ -27,4 +29,4 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='mission/logout.html'), name='logout'),
     path('reset/', auth_views.PasswordResetView.as_view(template_name = 'mission/resetpassword.html'), name = 'reset'),
     path('resetDone/', auth_views.PasswordResetDoneView.as_view(template_name = 'mission/resetdone.html'), name = 'resetDone'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -27,37 +27,22 @@
 
                 <!-- the actual blog post: title/author/date/content -->
                 <hr>
-                <p><i class="fa fa-clock-o"></i> Posted on August 29, 2018 at 9:00 PM
+                <p><i class="fa fa-clock-o"></i> Posted on To MMUSDA Members:
                 </p>
                 <hr>
-                <h3>Announcement Title <small class="pull-right">
-                    <span class="label label-default">Date:</span>
-                    <span class="label label-default">By:</span>
-                </small></h3>
-                <hr>
-                <p>You know, being a test pilot isn't always the healthiest business in the world.</p>
-                <p>Cookie jelly beans soufflé icing. Gummi bears tootsie roll powder chupa chups cheesecake chocolate jelly-o lollipop lollipop. Halvah applicake chupa chups. Marshmallow chocolate jujubes icing lollipop gummi bears chupa chups pudding bonbon. Jelly beans jelly soufflé jujubes. Sesame snaps lollipop icing donut lemon drops soufflé.</p>
-                <p>Donut caramels gingerbread. Sweet roll macaroon pastry cotton candy oat cake sesame snaps biscuit lemon drops dessert. Candy canes carrot cake danish carrot cake soufflé jelly chocolate cake muffin. Topping brownie donut. Oat cake marzipan dragée cheesecake. Donut chocolate cake jujubes tart dragée toffee.</p>
-                <hr>
-                <h3>Announcement Title <small class="pull-right">
-                    <span class="label label-default">Date:</span>
-                    <span class="label label-default">By:</span>
-                </small></h3>
-                <hr>
-                <p>You know, being a test pilot isn't always the healthiest business in the world.</p>
-                <p>Cookie jelly beans soufflé icing. Gummi bears tootsie roll powder chupa chups cheesecake chocolate jelly-o lollipop lollipop. Halvah applicake chupa chups. Marshmallow chocolate jujubes icing lollipop gummi bears chupa chups pudding bonbon. Jelly beans jelly soufflé jujubes. Sesame snaps lollipop icing donut lemon drops soufflé.</p>
-                <p>Donut caramels gingerbread. Sweet roll macaroon pastry cotton candy oat cake sesame snaps biscuit lemon drops dessert. Candy canes carrot cake danish carrot cake soufflé jelly chocolate cake muffin. Topping brownie donut. Oat cake marzipan dragée cheesecake. Donut chocolate cake jujubes tart dragée toffee.</p>
-                <hr>
+                {% if ann %}
+                    {% for announ in ann %}
+                        <h3>{{announ.announcement_title}} <small class="pull-right">
+                            <span class="label label-default">Date: {{announ.announcement_due_date.date}}</span>
+                            <span class="label label-default">By:{{announ.announcement_due_date.time}}</span>
+                        </small></h3>
+                        <hr>
+                        <p>{{ announ.announcement_description }}</p>
+                        <hr>
 
-                <h3>Announcement Title <small class="pull-right">
-                    <span class="label label-default">Date:</span>
-                    <span class="label label-default">By:</span>
-                </small></h3>
-                <hr>
-                <p>You know, being a test pilot isn't always the healthiest business in the world.</p>
-                <p>Cookie jelly beans soufflé icing. Gummi bears tootsie roll powder chupa chups cheesecake chocolate jelly-o lollipop lollipop. Halvah applicake chupa chups. Marshmallow chocolate jujubes icing lollipop gummi bears chupa chups pudding bonbon. Jelly beans jelly soufflé jujubes. Sesame snaps lollipop icing donut lemon drops soufflé.</p>
-                <p>Donut caramels gingerbread. Sweet roll macaroon pastry cotton candy oat cake sesame snaps biscuit lemon drops dessert. Candy canes carrot cake danish carrot cake soufflé jelly chocolate cake muffin. Topping brownie donut. Oat cake marzipan dragée cheesecake. Donut chocolate cake jujubes tart dragée toffee.</p>
-                <hr>
+                    {% endfor %}
+                {% endif %}
+                       
             </div>
 
             <div class="col-lg-4">
@@ -75,26 +60,15 @@
                 <div class="well">
                     <h4>Other Important Announcements</h4>
                     <ul class="list-group">
-                        <li class="list-group-item">
-                            <h5>Sub-Announcement 1</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis delectus vero accusantium quod ipsa asperiores obcaecati inventore hic, iusto fugiat corporis pariatur eius suscipit quaerat ut, illum, modi? </p>
-                        </li>
-                        <li class="list-group-item">
-                             <h5>Sub-Announcement 2</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis delectus vero accusantium quod ipsa asperiores obcaecati inventore hic, iusto fugiat corporis pariatur eius suscipit quaerat ut, illum, modi? </p>
-                        </li>
-                        <li class="list-group-item">
-                             <h5>Sub-Announcement 3</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis delectus vero accusantium quod ipsa asperiores obcaecati inventore hic, iusto fugiat corporis pariatur eius suscipit quaerat ut, illum, modi? </p>
-                        </li>
-                        <li class="list-group-item">
-                             <h5>Sub-Announcement 4</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis delectus vero accusantium quod ipsa asperiores obcaecati inventore hic, iusto fugiat corporis pariatur eius suscipit quaerat ut, illum, modi? </p>
-                        </li>
-                        <li class="list-group-item">
-                             <h5>Sub-Announcement 5</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis delectus vero accusantium quod ipsa asperiores obcaecati inventore hic, iusto fugiat corporis pariatur eius suscipit quaerat ut, illum, modi? </p>
-                        </li>
+                        {% if sub %}
+                            {% for suba in sub %}
+                                <li class="list-group-item">
+                                    <h5 class = "h4">{{suba.announcement_title}}</h5>
+                                    <p>{{ suba.announcement_description}}</p>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                       
                     </ul>
                 </div>
                 <!-- /well -->

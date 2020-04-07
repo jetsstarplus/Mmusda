@@ -69,6 +69,7 @@
 
             {% if event %}
 
+            <!-- This is the  area that shows the events page-->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>SDA Family Events</h2>
@@ -76,37 +77,13 @@
                 </div>
                 {% for item in event %}
                     <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
-                        <a href="{% url 'sda:item' %}">
-                            <img class="img-responsive img-home-portfolio" src="{% static 'item.image_link' %}">
+                        <a href="{% url 'sda:item' item.id %}">
+                            <img class="img-responsive img-home-portfolio" src="{{item.image_link.url}}">
                         </a>
                     </div>
                 {% endfor %}
-                <!-- <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
-                    <a href="{% url 'sda:item' %}">
-                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d2.jpg' %}">
-                    </a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
-                    <a href="{% url 'sda:item' %}">
-                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d3.jpg' %}">
-                    </a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
-                    <a href="{% url 'sda:item' %}">
-                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d4.jpg' %}">
-                    </a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
-                    <a href="{% url 'sda:item' %}">
-                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d5.jpg' %}">
-                    </a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 img-medium">
-                    <a href="{% url 'sda:item' %}">
-                        <img class="img-responsive img-home-portfolio" src="{% static 'sda/img/d1.jpg' %}">
-                    </a>
-                </div>
-            </div> -->
+              
+              
 
             {% endif %}
             <!-- /.row -->
