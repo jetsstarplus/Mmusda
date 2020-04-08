@@ -28,27 +28,27 @@ class DepartmentsAdmin(admin.ModelAdmin):
     fieldsets = [
         ("Create A New Department", {'fields': ['department_name']}), 
         (None , {'fields': ['department_role']}), 
-        (None, {'fields' : ['department_inspiration']})
+        (None, {'fields' : ['department_inspiration']}),
+        (None, {'fields' : ['department_category']})
 
     ]
 admin.site.register(models.Department, DepartmentsAdmin)
 
 
-#Church Leaders Admin Presentation
+# #Church Leaders Admin Presentation
 class ChurchLeadersAdmin(admin.ModelAdmin):
 
-    list_display = ('full_name','leader_contact')
-    search_fields = ['leader_first_name']
+    list_display = ('full_name','contact')
+    search_fields = ['first_name']
     fieldsets = [
-        ('First Name', {'fields': ['leader_first_name']}),
-        ('Surname', {'fields': ['leader_last_name']}), 
-        ('Phone Number', {'fields':['leader_contact']}), 
-        ('Year Of Admission', {'fields' : ['leader_Adm_Year']})
+        ('User', {'fields': ['user']}), 
+        ('Phone Number', {'fields':['contact']}), 
+        ('Year Of Admission', {'fields' : ['Adm_Year']})
     ]
 
     inlines = [DptInline, FamInline]
 
-admin.site.register(models.Church_leader, ChurchLeadersAdmin)
+admin.site.register(models.Church_Member, ChurchLeadersAdmin)
 
 #Family Representation
 

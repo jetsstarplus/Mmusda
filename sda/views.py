@@ -10,12 +10,14 @@ def Index(request):
     visitor_word = models.visitor_word.objects.order_by('-pub_date')[:1]
     other_bussinesses = models.OtherBussiness.objects.order_by('-pub_date')[:3]
     event = models.Event.objects.order_by('-pub_date')[:6]
+    annIndex = models.Announcement.objects.order_by('-announcement_due_date')[:8]
     
     context = { 
         'scripture': scripture,
          'visitor_word': visitor_word, 
          'other_bussinesses': other_bussinesses, 
-         'event': event
+         'event': event,
+        'annIndex':annIndex
      }
    
     return render(request, 'sda/index.html', context)
@@ -58,7 +60,8 @@ def announcements(request):
     context = {
         'ann': ann,
         'sub':sub,
-        'ann2':ann2
+        'ann2':ann2,
+       
     }
     return render(request, 'sda/announcements.html', context)
 

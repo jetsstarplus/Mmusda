@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'mmusda.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.mysql',
-        'NAME':'mmusda',
+        'NAME':'mmusda1',
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',

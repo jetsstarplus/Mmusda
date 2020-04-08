@@ -100,21 +100,22 @@
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <img class="img-responsive img-other" src="{% static 'sda/img/d1.jpg' %}">
+                    <img class="img-responsive" src="{% static 'sda/img/d1.jpg' %}">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <h2>Latest Annoncements and Updates</h2>
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                    </ul>
+                    {% if annIndex %}
+                        
+                        <table class = "table table-borderless">
+                            {% for ann in annIndex %}
+                            <tr>
+                               <td><b>{{ann.announcement_title}}</b></td>
+                               <td><b>:</b></td>
+                               <td>{{ann.announcement_due_date}}</td> 
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
                 </div>
             </div>
             <!-- /.row -->

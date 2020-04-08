@@ -1,27 +1,35 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Department(models.Model):
+    choice = [
+        ('Members Welfare', 'Members Welfare'),
+        ('Internal Activities', 'Internal Activities'),
+        ('Church Affairs', 'Church Affairs'),
+        ('Ministry & Outreach', 'Ministry & Outreach')
+    ]
+
     department_name = models.CharField(max_length = 20)
     department_role = models.CharField(max_length = 500)
     department_inspiration = models.CharField(max_length = 50)
+    category = models.CharField(max_length = 50, choices = choice, blank = True)
    
 
     def __str__(self):
         return self.department_name
 
 
-class Church_leader(models.Model):
-    leader_first_name = models.CharField(max_length =20)
-    leader_last_name = models.CharField(max_length = 20)
-    leader_contact = models.CharField(max_length = 20)
-    leader_Adm_Year = models.IntegerField('Year Of Admission')
+class Church_Member(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    contact = models.CharField(max_length = 20)
+    Adm_Year = models.IntegerField('Year Of Admission')
 
 
     # a concatenation of the first name and the last name
     def full_names(self):
-        return self.leader_first_name + ' ' + self.leader_last_name
+        return self.user.first_name + ' ' + self.user.last_name
 
     full_names.short_description = 'Full Name'
     full_names.admin_order_field = 'leader_last_name'
@@ -45,7 +53,7 @@ class Announcement(models.Model):
     announcement_description = models.TextField()
     announcement_due_date = models.DateTimeField('Due Date')
     publication_date = models.DateTimeField('Date Published', default = timezone.now())
-    user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
     announcement_classification = models.CharField(max_length = 30, choices = status_choice)
     announcement_specification = models.CharField(max_length = 100, default = "None")
 
@@ -83,7 +91,7 @@ class Scripture(models.Model):
     scripture_content = models.TextField()
     attached_verses = models.CharField(max_length = 30)
     pub_date = models.DateTimeField('Date published', default = timezone.now())
-    user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
     status = models.CharField(max_length = 20, choices = status_choice)
 
     def __str__(self):
@@ -169,8 +177,7 @@ class visitor_word(models.Model):
     title = models.CharField(max_length = 30)
     content = models.TextField()
     pub_date = models.DateTimeField('date published', default = timezone.now())
-    user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
-
+    user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
     def __str__(self):
         return self.title 
 
@@ -187,7 +194,7 @@ class About(models.Model):
     title = models.CharField(max_length = 30)
     content = models.TextField()
     pub_date = models.DateTimeField('date published', default = timezone.now())
-    user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
 
     def __str__(self):
         return self.title 
@@ -206,7 +213,7 @@ class OtherBussiness(models.Model):
     other_title = models.CharField(max_length = 30)
     other_description = models.TextField()
     pub_date = models.DateTimeField('Date Published', default = timezone.now())
-    user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
 
     class meta():
         plural = "Other Bussinesses"
@@ -224,7 +231,7 @@ class OtherBussiness(models.Model):
 
 
 class elder(models.Model):
-    user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
     duty = models.BooleanField('Is Elder On Duty')
     short_sharing = models.TextField()
     is_working = models.BooleanField('Is Elder Active')
@@ -242,7 +249,7 @@ class Leaders_Department(models.Model):
         ]
 
 
-        user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
+        user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
         dept_id = models.ForeignKey(Department, on_delete = models.CASCADE)
         dpt_role = models.CharField(max_length = 30, choices = DEPARTMENTS, default = 'Family')
         dpt_rate = models.IntegerField()
@@ -258,7 +265,7 @@ class Leaders_Family(models.Model):
             
         ]
 
-        user_id = models.ForeignKey(Church_leader, on_delete = models.CASCADE)
+        user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
         family = models.ForeignKey(Family, on_delete = models.CASCADE)
         fam_role = models.CharField(max_length = 30, choices = FAMILY, default = 'Child')
 
