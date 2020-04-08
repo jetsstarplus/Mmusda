@@ -53,9 +53,9 @@ def dept_ministries_outreach(request):
     return render(request, 'sda/dept_ministries_outreach.html')
 
 def announcements(request):
-    ann = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')
+    ann = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:4]
     ann2 = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:1]
-    sub = models.Announcement.objects.filter(announcement_classification__startswith = 'Sub')
+    sub = models.Announcement.objects.filter(announcement_classification__startswith = 'Sub')[:5]
 
     context = {
         'ann': ann,

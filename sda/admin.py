@@ -29,7 +29,7 @@ class DepartmentsAdmin(admin.ModelAdmin):
         ("Create A New Department", {'fields': ['department_name']}), 
         (None , {'fields': ['department_role']}), 
         (None, {'fields' : ['department_inspiration']}),
-        (None, {'fields' : ['department_category']})
+        (None, {'fields' : ['category']})
 
     ]
 admin.site.register(models.Department, DepartmentsAdmin)
