@@ -35,6 +35,12 @@
 
                 <div class="col-md-4">
                     <h3>{{ item.event_name}}</h3>
+                    {% if timeSpan %}:
+                        <em><h5> On {{item.start_date.date}}</h5></em>
+                    
+                    {% else %}:
+                         <em><h5>From {{item.start_date.date}} To {{item.due_date.date}}</h5></em>
+                    {% endif %}
                     <p>{{item.description}}</p>
 
                     <!-- The details plane/area-->

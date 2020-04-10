@@ -40,7 +40,8 @@ class Church_Member(models.Model):
        
         return self.full_name
         
-
+    class Meta:
+        verbose_name_plural = 'Church Members'
     
 
 
@@ -122,6 +123,10 @@ class Family(models.Model):
     #family_announcements = models.ForeignKey(Announcements, on_delete = models.CASCADE)
     inspiration = models.CharField(max_length = 500)
 
+    
+    class Meta:
+        verbose_name_plural = 'Families'
+
     def __str__(self):
         return self.family_name
 
@@ -130,7 +135,8 @@ class Family(models.Model):
 class Event(models.Model):
    
     event_name = models.CharField(max_length= 50)
-    due_date = models.DateTimeField('Due Date')
+    start_date = models.DateTimeField('Start Date')
+    due_date = models.DateTimeField('Due Date', blank = True)
     description = models.TextField()
     image_link = models.ImageField(upload_to = 'sda')
     pub_date = models.DateTimeField('Publication Date', default = timezone.now())
@@ -138,6 +144,9 @@ class Event(models.Model):
 
     def __str__(self):
         return self.event_name
+    
+    def timeSpan(self):
+        return self.due_date - self.start_date <= datetime.timedelta(days = 1)
 
     #check if the publication was done recently
     def was_published_recently(self):
@@ -149,6 +158,8 @@ class Event(models.Model):
         now = timezone.now()
         return now-datetime.timedelta(days = 14) <= self.due_date >= now
     
+    #the timespan function justification
+    timeSpan.boolean = True
 
     #justification if the date was indeed due
     is_date_due.admin_order_field = "due_date"
@@ -161,6 +172,54 @@ class Event(models.Model):
     was_published_recently.short_description = 'Published recently?'
 
 
+class services(models.Model):
+    choice = [
+        ('Sunday', 'Sunday'),
+        ('Monday', 'Monday'),
+        ('Teusday', 'Teusday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thusday'),
+        ('Friday', 'Friday'),
+        ('Saturday', 'Saturday')
+    ]
+
+    timeChoice = [
+        ('Morning', 'Morning'),
+        ('Afternoon', 'Afternoon'),
+        ('Evening', 'Evening')
+    ]
+   
+    service_name = models.CharField(max_length= 50)
+    description = models.TextField()
+    image_link = models.ImageField(upload_to = 'services')
+    pub_date = models.DateTimeField('Publication Date', default = timezone.now())
+    day = models.CharField(blank = True, choices = choice, max_length = 50)
+    Time_From = models.TimeField(blank = True)
+    Time_To = models.TimeField(blank = True)
+    Venue = models.CharField(blank = True, max_length = 50)
+    TimeLIne = models.CharField(blank = True, max_length = 50, choices = timeChoice)
+    
+    class Meta:
+        verbose_name_plural = 'Services'
+
+    def __str__(self):
+        return self.service_name
+
+    #check if the publication was done recently
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days = 7) <=  self.pub_date <= now
+
+    
+    def timeSpan(self):
+        span = self.Time_To - self.Time_To
+        return span
+    
+
+    #justifications to confirm if publication was recent    
+    was_published_recently.admin_order_field = 'pub_date'
+    was_published_recently.boolean = True
+    was_published_recently.short_description = 'Published recently?'
 
 # this model holds the details of the events described above
 class EventsDetail(models.Model):
@@ -178,6 +237,10 @@ class visitor_word(models.Model):
     content = models.TextField()
     pub_date = models.DateTimeField('date published', default = timezone.now())
     user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'Visitor Word'
+
     def __str__(self):
         return self.title 
 
@@ -195,6 +258,10 @@ class About(models.Model):
     content = models.TextField()
     pub_date = models.DateTimeField('date published', default = timezone.now())
     user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
+
+    
+    class Meta:
+        verbose_name_plural = 'About'
 
     def __str__(self):
         return self.title 
@@ -215,8 +282,8 @@ class OtherBussiness(models.Model):
     pub_date = models.DateTimeField('Date Published', default = timezone.now())
     user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
 
-    class meta():
-        plural = "Other Bussinesses"
+    class Meta:
+        verbose_name_plural = 'Other Businesses'
 
     def __str__(self):
         return self.other_title
@@ -253,7 +320,9 @@ class Leaders_Department(models.Model):
         dept_id = models.ForeignKey(Department, on_delete = models.CASCADE)
         dpt_role = models.CharField(max_length = 30, choices = DEPARTMENTS, default = 'Family')
         dpt_rate = models.IntegerField()
-        
+
+        class Meta:
+            verbose_name_plural = 'Department Leaders'
 
 
 

@@ -58,205 +58,82 @@
             <div class="col-lg-12">
                 <h2 class="page-header">Weekly View</h2>
                 <ul id="myNavPills" class="nav nav-pills">
-                    <li class="active"><a href="#monday" data-toggle="tab">Monday</a>
+                    <li class="active"><a href="#Monday" data-toggle="tab">Monday</a>
                     </li>
-                    <li><a href="#tuesday" data-toggle="pill">Tuesday</a>
+                    <li><a href="#Teusday" data-toggle="pill">Tuesday</a>
                     </li>
-                    <li><a href="#wednesday" data-toggle="pill">Wednesday</a>
+                    <li><a href="#Wednesday" data-toggle="pill">Wednesday</a>
                     </li>
-                    <li><a href="#thursday" data-toggle="pill">Thursday</a>
+                    <li><a href="#Thursday" data-toggle="pill">Thursday</a>
                     </li>
-                    <li><a href="#friday" data-toggle="pill">Friday</a>
+                    <li><a href="#Friday" data-toggle="pill">Friday</a>
                     </li>
-                    <li><a href="#saturday" data-toggle="pill">Saturday</a>
+                    <li><a href="#Saturday" data-toggle="pill">Saturday</a>
                     </li>
-                    <li><a href="#sunday" data-toggle="pill">Sunday</a>
+                    <li><a href="#Sunday" data-toggle="pill">Sunday</a>
                     </li>
                 </ul>
+
                 <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane fade in active tab-pad" id="monday">
+                    {% if morning %}
+                    {% for day in morning %}
+                    <div class="tab-pane fade in active tab-pad" id="{{day.day}}">
+                      
                         <div class="row">
+                        
                             <div class="col-sm-6">
-                                <h3><small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
+                                <table class = "table table-borderless">
+                                    <h3><small>
+                                            <tr>
+                                                <td><span class="label label-danger">Title:</span></td>
+                                                <td>{{day.service_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-default">Venue:</span></td>
+                                                <td>{{day.Venue}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-success">Time:</span></td>
+                                                <td>From {{day.Time_From}} To {{day.Time_To}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-warning">Description:</span></td>
+                                                <td></td>
+                                            </tr>
+                                        </small>
+                                    </h3>
+                                </table>
+                                <p>{{day.description}}</p>
                             </div>
                             <div class="col-sm-6">
-                                <h3><small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
+                                <table class = "table table-borderless">
+                                    <h3><small>
+                                            <tr>
+                                                <td><span class="label label-danger">Title:</span></td>
+                                                <td>{{day.service_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-default">Venue:</span></td>
+                                                <td>{{day.Venue}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-success">Time:</span></td>
+                                                <td>From {{day.Time_From}} To {{day.Time_To}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-warning">Description:</span></td>
+                                                <td></td>
+                                            </tr>
+                                        </small>
+                                    </h3>
+                                </table>
+                                <p>{{day.description}}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade tab-pad" id="tuesday">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade tab-pad" id="wednesday">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade tab-pad" id="thursday">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade tab-pad" id="friday">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br>
-                                        <span class="label label-default">Venue:</span>
-                                        <br>
-                                        <span class="label label-success">Time:</span>
-                                        <br>
-                                        <span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade tab-pad" id="saturday">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade tab-pad" id="sunday">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3>
-                                    <small>
-                                        <span class="label label-danger">Title:</span>
-                                        <br><span class="label label-default">Venue:</span>
-                                        <br><span class="label label-success">Time:</span>
-                                        <br><span class="label label-warning">Description:</span>
-                                    </small>
-                                </h3>
-                                <p>Nam fringilla quis enim in eleifend. Suspendisse sed lectus mauris. Nam commodo, arcu et posuere placerat, tellus tortor dignissim eros, sit amet eleifend urna lorem sit amet nulla. Praesent sem nibh, vulputate nec congue eu, dapibus vitae augue.</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+                    {% endif %}
+                   
                 </div>
             </div>
 
@@ -271,27 +148,18 @@
                 <h2 class="page-header">Service Showcase</h2>
             </div>
 
-            <div class="col-sm-4">
-                <img class="img-responsive img-other" src="{% static 'sda/img/s1.png' %}">
-                <h3>Service One</h3>
-                <p>Service one description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In hac habitasse platea dictumst.</p>
-                <a class="btn btn-link btn-sm pull-right">More <i class="fa fa-angle-right"></i></a>
-            </div>
+            {% if sabbath %}
+                {% for sab in sabbath%}
+                    <div class="col-sm-4">
+                        <img class="img-responsive img-other" src="{{sab.image_link.url}}">
+                        <h3>{{sab.service_name}}</h3>
+                        <p>{{sab.description}}</p>
+                        <a class="btn btn-link btn-sm pull-right">God Bless You </a>
+                    </div>
+                {% endfor %}
 
-            <div class="col-sm-4">
-                <img class="img-responsive img-other" src="{% static 'sda/img/s1.png' %}">
-                <h3>Service Two</h3>
-                <p>Service two description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In hac habitasse platea dictumst.</p>
-                <a class="btn btn-link btn-sm pull-right">More <i class="fa fa-angle-right"></i></a>
-            </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-other" src="{% static 'sda/img/s1.png' %}">
-                <h3>Service Three</h3>
-                <p>Service three description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In hac habitasse platea dictumst.</p>
-                <a class="btn btn-link btn-sm pull-right">More <i class="fa fa-angle-right"></i></a>
-            </div>
-
+            {% endif %}
+        
         </div>
         <!-- /.row -->
 

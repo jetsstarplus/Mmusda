@@ -38,7 +38,15 @@ def Event(request, event_id):
 
 
 def services(request):
-    return render(request, 'sda/services.html')
+    morning = models.services.objects.filter(TimeLIne = "Morning")
+    after = models.services.objects.filter(TimeLIne = "Evening")
+    sabbath = models.services.objects.filter(day = "Saturday")
+    context = {
+        'morning':morning,
+        'sabbath':sabbath,
+        'after':after
+    }
+    return render(request, 'sda/services.html', context)
 
 def dept_inside_activities(request):
     return render(request, 'sda/dept_inside_activities.html')
@@ -64,6 +72,22 @@ def announcements(request):
        
     }
     return render(request, 'sda/announcements.html', context)
+
+def search(request):
+
+    if request.method == "GET":
+        form = request.GET.get('search')
+        if form.is_valid():
+            ann = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:4]
+            ann2 = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:1]
+            sub = models.Announcement.objects.filter(announcement_title__icontains = form)[:5]
+
+            context = {
+                'ann': ann,
+                'sub':sub,
+                'ann2':ann2,
+            }
+    return render(request, 'sda/search.html', context)
 
 
 def sermons(request):

@@ -73,6 +73,7 @@ class Scripture(admin.ModelAdmin):
         ('Scripture', {'fields' : ['scripture_content']}),
         ('Attached Verses', {'classes' : ['extrapretty'],'fields' : ['attached_verses']}),
         ('Date Published', {'classes': ['extrapretty'], 'fields' : ['pub_date']}),
+        
         (None, {'fields': ['status']}),
         (None, {'fields': ['user_id']})
     ]
@@ -118,7 +119,8 @@ class Event(admin.ModelAdmin):
         ("Event Name", {'fields': ['event_name']}), 
         ("Description", {'fields': ['description']}),
         ("Image Link", {'fields': ['image_link']}),
-        ("Due Date", {'fields': ['due_date']}),
+        ("TimeLine", {'fields': ['start_date']}),
+        (None, {'fields': ['due_date']}),
         ("Family Responsible", {'fields': ['family_id']})
         
          ]
@@ -133,10 +135,39 @@ class Event(admin.ModelAdmin):
 
     list_filter = ['pub_date', 'due_date', 'event_name']
     search_fields = ['event_name']
-    list_display = ('event_name', 'due_date', 'is_date_due', 'family_name', 'was_published_recently')
+    list_display = ('event_name', 'start_date','due_date', 'is_date_due', 'family_name', 'was_published_recently')
     inlines = [detailInline]
     
 admin.site.register(models.Event, Event)
+
+
+# The class that handles all the services in the church alongside with their respective updates
+class services(admin.ModelAdmin):
+    fieldsets = [
+        ("Service Name", {'fields': ['service_name']}), 
+        ("Description", {'fields': ['description']}),
+        ("Image Link", {'fields': ['image_link']}),
+        ("Service Day", {'fields': ['day']}),
+        ("Service Time", {'fields': ['Time_From']}),
+        (None, {'fields':['Time_To']}),
+        (None, {'fields':['Venue']}),
+        (None, {'fields':['TimeLIne']})
+        
+         ]
+
+
+    #this returns the the title family responsible and the name in uppercase
+    def family_name(self, obj):
+        return ("%s" % (obj.family_id)).upper()
+
+
+    family_name.short_description='Family Responsible'
+
+    list_filter = ['pub_date','day','service_name']
+    search_fields = ['service_name']
+    list_display = ('service_name', 'day', 'Venue','Time_From', 'Time_To', 'was_published_recently')
+    
+admin.site.register(models.services, services)
 
 
 #The frequently Asked Questions and their answers as made in the Admin Panel

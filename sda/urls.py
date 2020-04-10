@@ -18,5 +18,5 @@ urlpatterns =[
     path('contact/', views.contact, name = 'contact'),
     path('item/<int:event_id>/', views.Event, name = 'item'),
     path('faq/', views.FAQView.as_view(), name = 'FAQ'),
-     
+    path('search/', views.search, name = 'Search'),
 ]
