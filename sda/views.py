@@ -22,9 +22,7 @@ def Index(request):
    
     return render(request, 'sda/index.html', context)
    
-    
-
-
+  
 def Event(request, event_id):    
     item = get_object_or_404(models.Event, pk = event_id)
     otheritem = models.Event.objects.exclude(pk = event_id).order_by('-pub_date')[:4]
@@ -38,13 +36,13 @@ def Event(request, event_id):
 
 
 def services(request):
-    morning = models.services.objects.filter(TimeLIne = "Morning")
-    after = models.services.objects.filter(TimeLIne = "Evening")
+    morning = models.services.objects.order_by('-day')
+    morn = models.services.objects.order_by('-day')
     sabbath = models.services.objects.filter(day = "Saturday")
     context = {
         'morning':morning,
         'sabbath':sabbath,
-        'after':after
+        'morn':morn
     }
     return render(request, 'sda/services.html', context)
 
@@ -91,9 +89,31 @@ def search(request):
 
 
 def sermons(request):
-    return render(request, 'sda/sermons.html')
+    itemother = models.Sermons.objects.order_by('publication_date')[:4]
+    sermon = models.Sermons.objects.order_by('-publication_date')[:4]
+    event = models.Event.objects.order_by('pub_date')[:5]
+    context = {
+        'sermon':sermon,
+        'itemother':itemother,
+        'event':event
+    }
+    return render(request, 'sda/sermons.html', context)
 
-def timeline(request):
+#this method explains in detail about the sermon to be discussed
+def sermonDetail(request, sermon_id):
+    item = get_object_or_404(models.Sermons, pk = sermon_id)
+    other = models.Sermons.objects.exclude(pk = sermon_id).order_by('-publication_date')[:4]
+    itemother = models.Sermons.objects.order_by('publication_date')[:4]
+    event = models.Event.objects.order_by('pub_date')[:5]
+    context = {
+        'item':item,
+        'other':other,
+        'itemother':itemother, 
+        'event':event
+    }
+    return render(request, 'sda/preaching-post.html', context)
+
+def timeline(request):    
     return render(request, 'sda/timeline.html')
 
 def about(request):

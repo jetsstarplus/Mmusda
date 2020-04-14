@@ -65,12 +65,12 @@ admin.site.register(models.Family, FamilyAdmin)
 
  
 
-# This is the admin interface for the theme scripture and setting it to be visible
+# This is the admin interface for the theme Comment and setting it to be visible
 class Scripture(admin.ModelAdmin):
     date_heirarchy = ['pub_date']
     fieldsets = [
         ('Scripture Theme', {'fields': ['scripture_title']}),
-        ('Scripture', {'fields' : ['scripture_content']}),
+        ('Scripture', {'fields' : ['Scripture_content']}),
         ('Attached Verses', {'classes' : ['extrapretty'],'fields' : ['attached_verses']}),
         ('Date Published', {'classes': ['extrapretty'], 'fields' : ['pub_date']}),
         
@@ -79,35 +79,35 @@ class Scripture(admin.ModelAdmin):
     ]
 
     list_filter = ['pub_date', 'scripture_title']
-    search_fields = ['scripture_title']
+    search_fields = ['Scripture_title']
     list_display = ('scripture_title',  'attached_verses' , 'user_id', 'status', 'was_published_recently')
-    actions = ['make_inactive', 'make_active']
+    actions = ['make_invisible', 'make_visible']
 
     # This action is used to show change the state of the
-    #  scripture content and so as to make it more
+    #  Scripture content and so as to make it more
     #  accessible and also readable
 
-    def make_inactive(self, request, queryset):
-        rowsupdated = queryset.update(status = "Inactive")
+    def make_invisible(self, request, queryset):
+        rowsupdated = queryset.update(status = "Invisible")
         if(rowsupdated == 1):
             message_bit = "1 Scripture Was"
         else:
             message_bit = "%s Scriptures Were " %rowsupdated
 
-        self.message_user(request, "%s Succesfully Marked Inactive" %message_bit)
+        self.message_user(request, "%s Succesfully Marked Invisible" %message_bit)
 
-    make_inactive.short_description = "Mark the Selected Scripture as Inactive"
+    make_invisible.short_description = "Mark the Selected Scripture as Invisible"
 
-    def make_active(self, request, queryset):
-        rowsupdated = queryset.update(status = "Active")
+    def make_visible(self, request, queryset):
+        rowsupdated = queryset.update(status = "visible")
         if(rowsupdated == 1):
             message_bit = "1 Scripture Was"
         else:
             message_bit = "%s Scriptures Were " %rowsupdated
 
-        self.message_user(request, "%s Succesfully Marked Active" %message_bit)
+        self.message_user(request, "%s Succesfully Marked visible" %message_bit)
         
-    make_active.short_description = "Mark the Selected Scriptures as Active"
+    make_visible.short_description = "Mark the Selected Scriptures as visible"
 
 admin.site.register(models.Scripture, Scripture)
 
@@ -276,4 +276,55 @@ class OtherBussiness(admin.ModelAdmin):
   
 
 admin.site.register(models.OtherBussiness, OtherBussiness)
+
+#This is the sermons model where the sermon and the sermon link is posted through to the users of the website
+class sermon(admin.ModelAdmin):
+    fieldsets = [
+        ('Enter The Details Of The Sermon', {'fields':['sermon_title']}),
+        (None, {'fields' :['sermon_speaker']}),
+        (None, {'fields' : ['sermon_link']}),
+        (None, {'fields': ['sermon_info']})
+    ]
+    list_filter = ['publication_date']
+    search_fields = ['sermon_title', 'sermon_speaker']
+    list_display = ['sermon_title', 'sermon_speaker', 'sermon_link', 'was_published_recently']
+
+admin.site.register(models.Sermons, sermon)
+
+#This is the comments in the admin that is placed by the user on the sermon or the other comment
+class comments(admin.ModelAdmin):
+    fieldsets = [
+        ('Sermon Commented On', {'fields': ['sermon']}),
+        (None, {'fields': ['state']}),
+        (None, {'fields': ['comment']}),
+        ('Commented By', {'fields': ['comment_by']})
+    ]
+    list_filter = ['sermon', 'state','comment_by']
+    search_fields = ['sermon', 'comment_by']
+    list_display = ['sermon', 'state', 'comment_by']
+    actions = ['make_invisible', 'make_visible']
+
+    def make_invisible(self, request, queryset):
+        rowsupdated = queryset.update(state = False)
+        if(rowsupdated == 1):
+            message_bit = "1 Comment Was"
+        else:
+            message_bit = "%s Comments Were " %rowsupdated
+
+        self.message_user(request, "%s Succesfully Marked Invisible" %message_bit)
+
+    make_invisible.short_description = "Mark the Selected Comment as Invisible"
+
+    def make_visible(self, request, queryset):
+        rowsupdated = queryset.update(state = True)
+        if(rowsupdated == 1):
+            message_bit = "1 Comment Was"
+        else:
+            message_bit = "%s Comments Were " %rowsupdated
+
+        self.message_user(request, "%s Succesfully Marked visible" %message_bit)
+        
+    make_visible.short_description = "Mark the Selected Comments as visible"
+
+admin.site.register(models.Comments, comments)
 # Register your models here.

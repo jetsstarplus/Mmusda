@@ -3,27 +3,12 @@ import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-class Department(models.Model):
-    choice = [
-        ('Members Welfare', 'Members Welfare'),
-        ('Internal Activities', 'Internal Activities'),
-        ('Church Affairs', 'Church Affairs'),
-        ('Ministry & Outreach', 'Ministry & Outreach')
-    ]
 
-    department_name = models.CharField(max_length = 20)
-    department_role = models.CharField(max_length = 500)
-    department_inspiration = models.CharField(max_length = 50)
-    category = models.CharField(max_length = 50, choices = choice, blank = True)
-   
-
-    def __str__(self):
-        return self.department_name
-
-
+#this model inherits the properties of the user Model template used by django
 class Church_Member(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     contact = models.CharField(max_length = 20)
+    is_leader = models.BooleanField( 'Is The Church Member A Leader?')
     Adm_Year = models.IntegerField('Year Of Admission')
 
 
@@ -43,8 +28,61 @@ class Church_Member(models.Model):
     class Meta:
         verbose_name_plural = 'Church Members'
     
+#this is the department's model that contains the information about the department
+class Department(models.Model):
+    choice = [
+        ('Members Welfare', 'Members Welfare'),
+        ('Internal Activities', 'Internal Activities'),
+        ('Church Affairs', 'Church Affairs'),
+        ('Ministry & Outreach', 'Ministry & Outreach')
+    ]
+
+    department_name = models.CharField(max_length = 20)
+    department_role = models.CharField(max_length = 500)
+    department_inspiration = models.CharField(max_length = 50)
+    category = models.CharField(max_length = 50, choices = choice, blank = True)
+    publication_date = models.DateTimeField('Date Published', default = timezone.now())
+   
+
+    def __str__(self):
+        return self.department_name
 
 
+class Sermons(models.Model):
+    sermon_title = models.CharField(max_length = 50)
+    sermon_speaker = models.CharField(max_length = 30)
+    sermon_link= models.CharField(max_length = 50)
+    sermon_info = models.TextField(blank = True)
+    publication_date = models.DateTimeField('Date Published', default = timezone.now())
+
+    class meta:
+        verbose_name_plural = 'Sermons'
+
+    def __str__(self):
+        return self.sermon_title
+
+         #check if it was recently published
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days = 7) <=  self.publication_date <= now
+
+    
+    was_published_recently.admin_order_field = 'pub_date'
+    was_published_recently.boolean = True
+    was_published_recently.short_description = 'Published recently?'
+
+
+#These are the comments possed on the question that is related to the sermon
+class Comments(models.Model):
+    sermon = models.ForeignKey(Sermons, on_delete = models.CASCADE)
+    state = models.BooleanField("Is This Comment Visible?")
+    comment_by = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
+    comment = models.TextField()
+
+    class meta:
+        verbose_name_plural = 'Comments'
+
+#This Is the model that allows the leaders to post their announcements to the site related to the department
 class Announcement(models.Model):
     status_choice = [
         ('Announcement', 'Announcement'),
@@ -57,6 +95,7 @@ class Announcement(models.Model):
     user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
     announcement_classification = models.CharField(max_length = 30, choices = status_choice)
     announcement_specification = models.CharField(max_length = 100, default = "None")
+    department = models.ForeignKey(Department, on_delete = models.CASCADE)
 
     def __str__(self):
         return self.announcement_title
@@ -299,9 +338,9 @@ class OtherBussiness(models.Model):
 
 class elder(models.Model):
     user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
-    duty = models.BooleanField('Is Elder On Duty')
+    duty = models.BooleanField('Is Elder On Duty?')
     short_sharing = models.TextField()
-    is_working = models.BooleanField('Is Elder Active')
+    is_working = models.BooleanField('Is Elder Active?')
 
 
 

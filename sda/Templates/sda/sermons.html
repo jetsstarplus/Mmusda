@@ -25,79 +25,28 @@
         <div class="row">
 
             <div class="col-lg-8">
+                {% if sermon %}
+                {% for speach in sermon %}
+                    <small class="label label-default">Title</small>
+                    <h3>
+                        {{speach.sermon_title}}
+                    </h3>
+                    <small>By {{speach.sermon_speaker}}</small>
+                    </p>
+                    <hr>
+                    <p><i class="fa fa-clock-o"></i> Posted on {{speach.publication_date}}</p>
+                    <hr>
+                    <div class="embed-responsive">
+                        <iframe width="750" height="315" src="{{speach.sermon_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <hr>
+                    <p style = "width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{speach.sermon_info}}</p>
+                    <a class="btn btn-primary" href="{% url 'sda:sermon' speach.id %}">Read More <i class="fa fa-angle-right"></i></a>
 
-                <small class="label label-default">Title</small>
-                <h3>
-                    Teaching From The Book of Luke
-                </h3>
-                <small>by Elisha Otieno</small>
-                </p>
-                <hr>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:00 PM</p>
-                <hr>
-                <div class="embed-responsive">
-                    <iframe width="750" height="315" src="https://www.youtube.com/embed/huFra1mnIVE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <hr>
-                <p>This is a very basic starter template for a blog homepage. It makes use of Font Awesome icons that are built into the 'Modern Business' template, and it makes use of the Bootstrap 3 pager at the bottom of the page.</p>
-                <a class="btn btn-primary" href="preaching-post.html">Read More <i class="fa fa-angle-right"></i></a>
-
-                <hr>
-
-                <small class="label label-default">Title</small>
-                <h3>
-                    Teaching From The Book of Luke
-                </h3>
-                <small>by Elisha Otieno</small>
-                </p>
-                <hr>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:00 PM</p>
-                <hr>
-                <div class="embed-responsive">
-                    <iframe width="750" height="315" src="https://www.youtube.com/embed/huFra1mnIVE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <hr>
-                <p>This is a very basic starter template for a blog homepage. It makes use of Font Awesome icons that are built into the 'Modern Business' template, and it makes use of the Bootstrap 3 pager at the bottom of the page.</p>
-                <a class="btn btn-primary" href="preaching-post.html">Read More <i class="fa fa-angle-right"></i></a>
-
-                <hr>
-
-                <small class="label label-default">Title</small>
-                <h3>
-                    Teaching From The Book of Luke
-                </h3>
-                <small>by Elisha Otieno</small>
-                </p>
-                <hr>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:00 PM</p>
-                <hr>
-                <div class="embed-responsive">
-                    <iframe width="750" height="315" src="https://www.youtube.com/embed/huFra1mnIVE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <hr>
-                <p>This is a very basic starter template for a blog homepage. It makes use of Font Awesome icons that are built into the 'Modern Business' template, and it makes use of the Bootstrap 3 pager at the bottom of the page.</p>
-                <a class="btn btn-primary" href="preaching-post.html">Read More <i class="fa fa-angle-right"></i></a>
-
-                <hr>
-
-                <small class="label label-default">Title</small>
-                <h3>
-                    Teaching From The Book of Luke
-                </h3>
-                <small>by Elisha Otieno</small>
-                </p>
-                <hr>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:00 PM</p>
-                <hr>
-                <div class="embed-responsive">
-                    <iframe width="750" height="315" src="https://www.youtube.com/embed/huFra1mnIVE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <hr>
-                <p>This is a very basic starter template for a blog homepage. It makes use of Font Awesome icons that are built into the 'Modern Business' template, and it makes use of the Bootstrap 3 pager at the bottom of the page.</p>
-                <a class="btn btn-primary" href="preaching-post.html">Read More <i class="fa fa-angle-right"></i></a>
-
-                <hr>
-
+                    <hr>
+                {% endfor %}
+                {% endif %}
+               
                 <ul class="pager">
                     <li class="previous"><a href="#">&larr; Older</a>
                     </li>
@@ -124,36 +73,43 @@
                     <h4>Popular Videos</h4>
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Other </h5>
-                            <ul class="list-group">
-                                <li class="list-group-item"><a href="#dinosaurs">Why Light Never Fails</a>
-                                </li>
-                                <li class="list-group-item"><a href="#spaceships">The Girl Next Door</a>
-                                </li>
-                                <li class="list-group-item"><a href="#fried-foods">Better Meals For Better People</a>
-                                </li>
-                                <li class="list-group-item"><a href="#wild-animals">Nature and Us</a>
-                                </li>
-                            </ul>
+                            <h5>Others </h5>
+                            {% if itemother %}
+                                <ul class="list-group">
+                                    {% for itm in itemother %}
+                                        <li class="list-group-item"><a href="{% url 'sda:sermon' itm.id %}">{{itm.sermon_title}}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         </div>
                         <div class="col-md-12">
-                            <ul class="list-group">
-                                <li class="list-group-item"><a href="#dinosaurs">Why Light Never Fails</a>
-                                </li>
-                                <li class="list-group-item"><a href="#spaceships">The Girl Next Door</a>
-                                </li>
-                                <li class="list-group-item"><a href="#fried-foods">Better Meals For Better People</a>
-                                </li>
-                                <li class="list-group-item"><a href="#wild-animals">Nature and Us</a>
-                                </li>
-                            </ul>
+                            {% if sermon %}
+                                <ul class="list-group">
+                                    {% for itm in sermon %}
+                                        <li class="list-group-item"><a href="{% url 'sda:sermon' itm.id %}">{{itm.sermon_title}}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <!-- /well -->
                 <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Bootstrap's default well's work great for side widgets! What is a widget anyways...?</p>
+                    <h4>Inline Events</h4>
+                    <div class = "row">
+                        <div class="col-md-12">
+                            {% if event %}
+                                <ul class="list-group">
+                                    {% for itm in event %}
+                                        <li class="list-group-item"><a href="{% url 'sda:item' itm.id %}">{{itm.event_name}}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
                 <!-- /well -->
             </div>
