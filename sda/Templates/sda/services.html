@@ -106,7 +106,7 @@
                                         </small>
                                     </h3>
                                 </table>
-                                <p>{{time.description}}</p>
+                                <p>{{time.description | truncatechars:300}}</p>
                             </div>
                             {% endif %}
                           {% endfor %}

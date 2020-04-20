@@ -37,7 +37,7 @@
                             <span class="label label-default">By:{{announ.announcement_due_date.time}}</span>
                         </small></h3>
                         <hr>
-                        <p>{{ announ.announcement_description }}</p>
+                        <p>{{ announ.announcement_description  }}</p>
                         <hr>
 
                     {% endfor %}
@@ -69,7 +69,7 @@
                             {% for suba in sub %}
                                 <li class="list-group-item">
                                     <h5 class = "h4">{{suba.announcement_title}}</h5>
-                                    <p>{{ suba.announcement_description}}</p>
+                                    <p>{{ suba.announcement_description |truncatechars:256}}</p>
                                 </li>
                             {% endfor %}
                         {% endif %}

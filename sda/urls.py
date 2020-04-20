@@ -19,5 +19,6 @@ urlpatterns =[
     path('item/<int:event_id>/', views.Event, name = 'item'),
     path('faq/', views.FAQView.as_view(), name = 'FAQ'),
     path('search/', views.search, name = 'Search'),
-    path('sermon/<int:sermon_id>/', views.sermonDetail, name = 'sermon')
+    path('sermon/<int:sermon_id>/', views.sermonDetail, name = 'sermon'),
+
 ]

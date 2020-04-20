@@ -22,10 +22,13 @@
       </div><!-- /.row -->
       
       <div class="row">
-
-        <div class="col-sm-8">
-          <h3>Let's Get In Touch!</h3>
-          <p>Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        {% if contact %}
+          {% for cont in contact %}
+              <div class="col-sm-8">
+                <h3>{{cont.title}}</h3>
+              <p>{{cont.content | truncatechars:450}}</p>
+            {% endfor %}
+          {% endif %}
 			<!-- <?php  
 
                 // check for a successful form post  
@@ -35,7 +38,7 @@
                 elseif (isset($_GET['e'])) echo "<div class=\"alert alert-danger\">".$_GET['e']."</div>";  
 
 			?> -->
-            <form role="form" method="POST" action="contact-form-submission.php">
+            <form role="form" method="POST" action="#">
 	            <div class="row">
 	              <div class="form-group col-lg-4">
 	                <label for="input1">Name</label>
@@ -61,20 +64,21 @@
               </div>
             </form>
         </div>
-
-        <div class="col-sm-4">
-          <h3>Modern Business</h3>
-          <h4>A Start Bootstrap Template</h4>
-          <p>
-            5555 44th Street N.<br>
-            Bootstrapville, CA 32323<br>
-          </p>
-          <p><i class="fa fa-phone"></i> <abbr title="Phone">P</abbr>: (555) 984-3600</p>
-          <p><i class="fa fa-envelope-o"></i> <abbr title="Email">E</abbr>: <a href="mailto:mmusda@gmail.com">mmusda@gmail.com</a></p>
-          <p><i class="fa fa-clock-o"></i> <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM</p>
-          
-        </div>
-
+        {% if contact %}
+        {% for cont in contact %}
+          <div class="col-sm-4">
+            <h3>{{cont.Name}}</h3>
+            <h4>{{cont.name_explain}}</h4>
+            <p>
+              {{cont.address}}
+            </p>
+            <p><i class="fa fa-phone"></i> <abbr title="Phone">P</abbr>: {{cont.contact}}</p>
+            <p><i class="fa fa-envelope-o"></i> <abbr title="Email">E</abbr>: <a href="mailto:{{cont.email}}">{{cont.email}}</a></p>
+            <p><i class="fa fa-clock-o"></i> <abbr title="Hours">H</abbr>: {{cont.timing}}</p>
+            
+          </div>
+        {% endfor %}
+        {% endif %}
       </div><!-- /.row -->
 
     </div><!-- /.container -->

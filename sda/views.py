@@ -10,6 +10,7 @@ def Index(request):
     visitor_word = models.visitor_word.objects.order_by('-pub_date')[:1]
     other_bussinesses = models.OtherBussiness.objects.order_by('-pub_date')[:3]
     event = models.Event.objects.order_by('-pub_date')[:6]
+    eventOutline = models.Event.objects.order_by('-pub_date')[:1]
     annIndex = models.Announcement.objects.order_by('-announcement_due_date')[:8]
     
     context = { 
@@ -17,6 +18,7 @@ def Index(request):
          'visitor_word': visitor_word, 
          'other_bussinesses': other_bussinesses, 
          'event': event,
+         'eventOutline': eventOutline,
         'annIndex':annIndex
      }
    
@@ -47,16 +49,56 @@ def services(request):
     return render(request, 'sda/services.html', context)
 
 def dept_inside_activities(request):
-    return render(request, 'sda/dept_inside_activities.html')
+    dept = models.Department.objects.filter(department_category = 'Internal Activities')
+    leaders = models.Leaders_Department.objects.order_by('id')[:2]
+    ann = models.Announcement.objects.order_by('-publication_date')[:10]
+    event = models.Event.objects.order_by('-pub_date')[:10]
+    context = {
+        'dept':dept, 
+        'leaders':leaders,
+        'ann':ann,
+        'event':event
+    }
+    return render(request, 'sda/dept_inside_activities.html', context)
 
 def dept_members_welfare(request):
-    return render(request, 'sda/dept_members_welfare.html')
+    dept = models.Department.objects.filter(department_category = 'Members Welfare')
+    leaders = models.Leaders_Department.objects.order_by('id')[:2]
+    ann = models.Announcement.objects.order_by('-publication_date')[:10]
+    event = models.Event.objects.order_by('-pub_date')[:10]
+    context = {
+        'dept':dept, 
+        'leaders':leaders,
+        'ann':ann,
+        'event':event
+    }
+    return render(request, 'sda/dept_members_welfare.html', context)
 
 def dept_church_affairs(request):
-    return render(request, 'sda/dept_church_affairs.html')
+    dept = models.Department.objects.filter(department_category = 'Church Affairs')
+    leaders = models.Leaders_Department.objects.order_by('id')[:2]
+    ann = models.Announcement.objects.order_by('-publication_date')[:10]
+    event = models.Event.objects.order_by('-pub_date')[:10]
+    context = {
+        'dept':dept, 
+        'leaders':leaders,
+        'ann':ann,
+        'event':event
+    }
+    return render(request, 'sda/dept_church_affairs.html', context)
 
 def dept_ministries_outreach(request):
-    return render(request, 'sda/dept_ministries_outreach.html')
+    dept = models.Department.objects.filter(department_category = 'Ministry & Outreach')
+    leaders = models.Leaders_Department.objects.order_by('id')[:2]
+    ann = models.Announcement.objects.order_by('-publication_date')[:10]
+    event = models.Event.objects.order_by('-pub_date')[:10]
+    context = {
+        'dept':dept, 
+        'leaders':leaders,
+        'ann':ann,
+        'event':event
+    }
+    return render(request, 'sda/dept_ministries_outreach.html', context)
 
 def announcements(request):
     ann = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:4]
@@ -104,7 +146,7 @@ def sermonDetail(request, sermon_id):
     item = get_object_or_404(models.Sermons, pk = sermon_id)
     other = models.Sermons.objects.exclude(pk = sermon_id).order_by('-publication_date')[:4]
     itemother = models.Sermons.objects.order_by('publication_date')[:4]
-    event = models.Event.objects.order_by('pub_date')[:5]
+    event = models.Event.objects.order_by('pub_date')[:10]
     context = {
         'item':item,
         'other':other,
@@ -113,19 +155,44 @@ def sermonDetail(request, sermon_id):
     }
     return render(request, 'sda/preaching-post.html', context)
 
-def timeline(request):    
-    return render(request, 'sda/timeline.html')
+#this represents the timeline page
+def timeline(request):  
+    timeline = models.Timeline.objects.filter(is_sabbath = True)
+    timelines = models.Timeline.objects.filter(is_sabbath = False)
+    event = models.Event.objects.order_by('pub_date')[:5]
+    context = {
+        'timeline':timeline, 
+        'timelines':timelines, 
+        'event':event
+    }  
+    return render(request, 'sda/timeline.html', context)
 
+#it renders the about Page to the site
 def about(request):
     about = models.About.objects.order_by('-pub_date')[:2]
-   
-    context = { 'about': about, }
+    leader = models.Church_Member.objects.filter(is_leader = True)[:8]
+    family = models.Family.objects.exclude(family_name = 'All')
+    famLeader = models.Leaders_Family.objects.all()
+    context = {
+         'about': about,
+         'leader':leader, 
+         'family':family, 
+         'famLeader':famLeader
+    }
    
     return render(request, 'sda/about.html', context)
 
+#This renders the Contact page to the site
 def contact(request):
-    return render(request, 'sda/contact.html')
+    # if request.method == 'POST'    
+    contact = models.contact.objects.order_by('-pub_date')[:1]
+    context = {
+        'contact':contact
+    }
+    return render(request, 'sda/contact.html', context)
 
+
+#This renders the faq to the actual MMU Website
 class FAQView(generic.ListView):
     template_name = "sda/faq.html"
     context_object_name = 'faq'

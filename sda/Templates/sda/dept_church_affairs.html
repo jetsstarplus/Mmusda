@@ -84,42 +84,29 @@
         <hr>   
         <div class="row">
             <div class="col-lg-6">
+                {% if ann %}
                 <h2>Announcements</h2>
                 <ul class="list-group">
-                    <li class="list-group-item">Church Movie Day lorem
-                        <span class="label label-default pull-right">Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Date:</span></li>
+                    {% for announce in ann %}
+                    <li class="list-group-item">{{announce.announcement_title}}
+                        <span class="label label-default pull-right">Date:  {{announce.announcement_due_date.date}}</span>
+                    </li>
+                    {% endfor %}
+                   
                 </ul>
+                {% endif %}
             </div>
             <div class="col-lg-6">
+                {% if event %}
                 <h2>Activities</h2>
                 <ul class="list-group">
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Start Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Start Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Start Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Start Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Start Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Start Date:</span></li>
-                    <li class="list-group-item">Church Movie Day 
-                        <span class="label label-default pull-right">Start Date:</span></li>
+                    {% for en in event %}
+                    <li class="list-group-item">{{en.event_name}} 
+                        <span class="label label-default pull-right">Start Date:  {{en.start_date.date}}</span>
+                    </li>
+                   {% endfor %}
                 </ul>
+                {% endif %}
             </div>
         </div>
 
@@ -128,16 +115,20 @@
             <div class="col-lg-12">
                <h2 class="page-header">Sub Departments</h2>
                <div class="panel-group" id="accordion">
+                   {% if dept %}
+                   {% for dpt in dept %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="accordion" data-parent="#accordion" href="#accordion">Deaconry</a>
+                                <a data-toggle="accordion" data-parent="#accordion" href="#accordion">{{dpt.department_name}}</a>
                             </h4>
                         </div>
                         <div id="collapse1" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <div class="row">
                                     <h2 class="page-header">&nbsp;Leadership</h2>
+                                    {% if leaders %}
+                                    {% for lead in leaders %}
                                     <div class="col-md-6 portfolio-item">
                                         <div class="row">
                                             <div class="col-sm-3">
@@ -145,181 +136,31 @@
                                             </div>
                                             <div class="col-sm-9">
                                                 <div class="media-body">
-                                                    <h4>Chair Person:</h4>
+                                                    <h4>{{lead.dpt_role}}: {{lead.user_id}}</h4>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
                                                     <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 portfolio-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="media-body">
-                                                    <h4>Other Leader:</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                                    <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
+                                    {% endfor %}
+                                    {% endif%}
+                                   
                                 </div><hr>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <h4>What We Do ...</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam incidunt voluptatum nisi illum minus corrupti inventore est sint fugit accusantium possimus ipsum ea nobis repellendus rerum veritatis, voluptatibus tempore molestiae.</p>
+                                        <p>{{dpt.department_role}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="accordion" data-parent="#accordion" href="#accordion">P.A</a>
-                            </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <h2 class="page-header">&nbsp;Leadership</h2>
-                                    <div class="col-md-6 portfolio-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="media-body">
-                                                    <h4>Chair Person:</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                                    <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 portfolio-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="media-body">
-                                                    <h4>Other Leader:</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                                    <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><hr>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4>What We Do ...</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam incidunt voluptatum nisi illum minus corrupti inventore est sint fugit accusantium possimus ipsum ea nobis repellendus rerum veritatis, voluptatibus tempore molestiae.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="accordion" data-parent="#accordion" href="#accordion">Family Life</a>
-                            </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <h2 class="page-header">&nbsp;Leadership</h2>
-                                    <div class="col-md-6 portfolio-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="media-body">
-                                                    <h4>Chair Person:</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                                    <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 portfolio-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="media-body">
-                                                    <h4>Other Leader:</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                                    <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><hr>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4>What We Do ...</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam incidunt voluptatum nisi illum minus corrupti inventore est sint fugit accusantium possimus ipsum ea nobis repellendus rerum veritatis, voluptatibus tempore molestiae.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="accordion" data-parent="#accordion" href="#accordion">Sabbath School</a>
-                            </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <h2 class="page-header">&nbsp;Leadership</h2>
-                                    <div class="col-md-6 portfolio-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="media-body">
-                                                    <h4>Chair Person:</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                                    <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 portfolio-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="media-body">
-                                                    <h4>Other Leader:</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                                    <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><hr>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4>What We Do ...</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam incidunt voluptatum nisi illum minus corrupti inventore est sint fugit accusantium possimus ipsum ea nobis repellendus rerum veritatis, voluptatibus tempore molestiae.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    
+                 
                 </div> 
             </div>
         </div>

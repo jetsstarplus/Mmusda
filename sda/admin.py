@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . import models
+from django.utils.safestring import mark_safe
 
 #*****************Inlines**********************#
 #this is a link between departments, family and leaders
@@ -16,50 +17,79 @@ class detailInline(admin.TabularInline):
     model = models.EventsDetail
     extra = 0
 
-
-
 #********************The actual tables in the admin Panel*****************************#
 
 #The departments admin presentation
 class DepartmentsAdmin(admin.ModelAdmin):
-    list_display = ('department_name', 'department_role')
+    list_display = ('department_name', 'department_role', 'department_category')
     search_fields = ['department_name']
     list_filter = ['department_name']
     fieldsets = [
         ("Create A New Department", {'fields': ['department_name']}), 
         (None , {'fields': ['department_role']}), 
         (None, {'fields' : ['department_inspiration']}),
-        (None, {'fields' : ['category']})
+        (None, {'fields' : ['department_category']})
 
     ]
 admin.site.register(models.Department, DepartmentsAdmin)
 
+#This is To create the Category and The leaders
+class DepartmentCategory(admin.ModelAdmin):
+    list_display = ('category_name','category_leader')
+    search_fields= ['category_name']
+    list_filter = ['publication_date']
+    fieldsets = [
+        ('Category Name', {'fields': ['category_name']}),
+        (None, {'fields': ['Category_role']}),
+        (None, {'fields': ['category_leader']})
+    ]
+admin.site.register(models.Department_Category, DepartmentCategory)
 
 # #Church Leaders Admin Presentation
 class ChurchLeadersAdmin(admin.ModelAdmin):
 
-    list_display = ('full_name','contact')
-    search_fields = ['first_name']
+    list_display = ('full_name','contact', 'profile', 'is_leader')
+    search_fields = ['full_name']
     fieldsets = [
         ('User', {'fields': ['user']}), 
         ('Phone Number', {'fields':['contact']}), 
-        ('Year Of Admission', {'fields' : ['Adm_Year']})
+        ('Year Of Admission', {'fields' : ['Adm_Year']}),
+        (None, {'fields': ['is_leader']}), 
+        (None, {'fields': ['profile_picture']})
     ]
 
     inlines = [DptInline, FamInline]
+
+     
+    def profile(self, obj):
+        return mark_safe('<img src = "{url}" width = "50px" height = "50px"/>'.format(
+            url = obj.profile_picture.url,
+             )
+        )
+
+    profile.short_description = 'Profile  Picture'
 
 admin.site.register(models.Church_Member, ChurchLeadersAdmin)
 
 #Family Representation
 
 class FamilyAdmin(admin.ModelAdmin):
-    list_display = ('family_name', 'inspiration')
+    list_display = ('family_name', 'inspiration', 'profile')
     search_fields = ['family_name']
     fieldsets = [
         ('Family Name', {'fields': ['family_name']}), 
-        ('Family Inspiration', {'fields': ['inspiration']}), 
+        ('Family Inspiration', {'fields': ['inspiration']}),
+        (None, {'fields': ['family_profile']}) 
              
     ]
+
+    def profile(self, obj):
+        return mark_safe('<img src = "{url}" width = "50px" height = "50px"/>'.format(
+            url = obj.family_profile.url,
+             )
+        )
+
+    profile.short_description = 'Profile  Picture'
 
 admin.site.register(models.Family, FamilyAdmin)
 
@@ -115,6 +145,12 @@ admin.site.register(models.Scripture, Scripture)
 
 # The class that handles all the event schedules alongside with their respective updates
 class Event(admin.ModelAdmin):
+    def profile(self, obj):
+        return mark_safe('<img src = "{url}" width = "50px" height = "50px"/>'.format(
+            url = obj.image_link.url,
+             )
+        )
+
     fieldsets = [
         ("Event Name", {'fields': ['event_name']}), 
         ("Description", {'fields': ['description']}),
@@ -125,6 +161,7 @@ class Event(admin.ModelAdmin):
         
          ]
 
+    profile.short_description = 'Profile  Picture'
 
     #this returns the the title family responsible and the name in uppercase
     def family_name(self, obj):
@@ -135,7 +172,7 @@ class Event(admin.ModelAdmin):
 
     list_filter = ['pub_date', 'due_date', 'event_name']
     search_fields = ['event_name']
-    list_display = ('event_name', 'start_date','due_date', 'is_date_due', 'family_name', 'was_published_recently')
+    list_display = ('event_name', 'start_date','due_date', 'is_date_due', 'family_name', 'was_published_recently', 'profile' )
     inlines = [detailInline]
     
 admin.site.register(models.Event, Event)
@@ -300,7 +337,7 @@ class comments(admin.ModelAdmin):
         ('Commented By', {'fields': ['comment_by']})
     ]
     list_filter = ['sermon', 'state','comment_by']
-    search_fields = ['sermon', 'comment_by']
+    search_fields = ['sermon__sermon_title', 'comment_by']
     list_display = ['sermon', 'state', 'comment_by']
     actions = ['make_invisible', 'make_visible']
 
@@ -327,4 +364,77 @@ class comments(admin.ModelAdmin):
     make_visible.short_description = "Mark the Selected Comments as visible"
 
 admin.site.register(models.Comments, comments)
+
+#Admin representation of the details of the contact
+class contact(admin.ModelAdmin):
+    fieldsets = [
+        ('Edit What Appears in The Contact Page', {'fields': ['title']}),
+        (None, {'fields':['content']}),        
+        ('Enter The Address Details', {'fields': ['Name']}), 
+        (None, {'fields': ['name_explain']}),
+        (None, {'fields': ['address']}), 
+        (None, {'fields': ['email']}),
+        (None, {'fields': ['contact']}),
+        (None, {'fields': ['timing']})        
+    ]
+
+    list_filter = ['pub_date']
+    search_fields = ['email']
+    list_display = ['title', 'Name','name_explain', 'address', 'email', 'contact', 'timing']
+
+admin.site.register(models.contact, contact)
+
+#Admin representation of the contacts that were sent to the users
+class Personal_Contact(admin.ModelAdmin):
+    fieldsets = [
+        ('The Contacts Sent', {'fields': ['Name']}),
+        (None, {'fields': ['email']}),
+        (None, {'fields': ['contact']}),
+        (None, {'fields': ['message']}),
+        (None, {'fields': ['status']})
+    ]
+
+    list_filter = ['pub_date']
+    search_fields = ['Name']
+    list_display = ['Name', 'email', 'contact', 'status', 'was_published_recently']
+
+admin.site.register(models.Personal_Contact, Personal_Contact )
 # Register your models here.
+
+
+# The class that handles all the timeline schedules alongside with their respective updates
+class Timeline(admin.ModelAdmin):
+    fieldsets = [
+        ("Event Name", {'fields': ['event_name']}),
+        ("TimeLine", {'fields': ['start_date']}),
+        (None, {'fields': ['due_date']}),
+        ('Is The event Allocated a Sabbath?', {'fields':['is_sabbath']})        
+         ]
+
+
+    #this returns the the title family responsible and the name in uppercase
+    def family_name(self, obj):
+        return ("%s" % (obj.family_id)).upper()
+
+
+    family_name.short_description='Family Responsible'
+
+    list_filter = ['pub_date', 'due_date', 'event_name']
+    search_fields = ['event_name']
+    list_display = ('event_name', 'start_date','due_date', 'is_date_due', 'is_sabbath', 'was_published_recently')
+    
+admin.site.register(models.Timeline, Timeline)
+
+
+#This is the registration of the elders and their roles
+class Elders(admin.ModelAdmin):
+    fieldsets = [
+        ('The Elder', {'fields': ['user_id']}),
+        ("Is the Elder On Duty?", {'fields' : ['duty']}),
+        (None, {'fields': ['short_sharing']}),
+        ("Is the Elder Working?", {'fields':['is_working']})
+    ]
+    list_filter = ['duty', 'is_working']
+    list_display = ['user_id', 'duty', 'is_working']
+
+admin.site.register(models.elder, Elders)

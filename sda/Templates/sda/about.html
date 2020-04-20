@@ -44,132 +44,40 @@
             <div class="col-lg-12">
                 <h2 class="page-header">Meet Our Team Members</h2>
             </div>
-
+            {% if leader %}
+            {% for lead in leader %}
             <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Lawrence Kamau
+                <img class="img-responsive img-full-width img-thumbnail" src="{{lead.profile_picture.url}}">
+                <h3>{{lead.full_name}}
                     <small>1<sup>st</sup> Elder</small>
                 </h3>
                 <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
             </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Oloo Edwin
-                    <small>Elder</small>
-                </h3>
-                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
-            </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Benjamin Elmard
-                    <small>Elder</small>
-                </h3>
-                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
-            </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Patric Ndungu
-                    <small>Elder</small>
-                </h3>
-                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
-            </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Alfred Kioko
-                    <small>Church Clerk</small>
-                </h3>
-                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
-            </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Helen Ongeni
-                    <small>Treasurer</small>
-                </h3>
-                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
-            </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Gerald Mirambo
-                    <small>Head Deacon</small>
-                </h3>
-                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
-            </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Vanessa Abuga
-                    <small>Head Deaconess</small>
-                </h3>
-                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
-            </div>
-
-            <div class="col-sm-4">
-                <img class="img-responsive img-full-width img-thumbnail" src="{% static 'sda/img/1.jpg' %}">
-                <h3>Mercy Chepchirchir
-                    <small>Sabbath School supretendant</small>
-                </h3>
-                <p>What does this team member do? Keep it short! This is also a great spot for social links!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti amet perspiciatis architecto, illo impedit, ut vitae aliquam pariatur omnis, ad nesciunt harum. Est incidunt repellendus numquam, necessitatibus quibusdam soluta voluptatibus!</p>
-            </div>
-
+            {% endfor %}
+            {% endif %}
+  
         </div>
 
         <!-- Our Customers -->
 
+        {% if family %}
         <div class="row">
-
+          
             <div class="col-lg-12">
                 <h2 class="page-header">Family heads</h2>
             </div>
 
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
-                <p>nihil reprehenderit quam iure.</p>
-            </div>
+            {% for fam in family %}
 
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
-                <p>nihil reprehenderit quam iure.</p>
+            <div class="col-md-1 col-md-6 col-xs-10">
+                <img class="img-responsive img-customer img-circle" src="{{fam.family_profile.url}}">
+                <p>{{fam.family_name}}</p>
             </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
-                <p>nihil reprehenderit quam iure.</p>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
-                
-                <p>nihil reprehenderit quam iure.</p>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
-                
-                <p>nihil reprehenderit quam iure.</p>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <img class="img-responsive img-customer img-circle" src="{% static 'sda/img/3.jpg' %}">
-                
-                <p>nihil reprehenderit quam iure.</p>
-            </div>
+            {% endfor %}
 
         </div>
+        {% endif %}
 
     </div>
     
