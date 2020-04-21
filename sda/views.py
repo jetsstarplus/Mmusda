@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views import generic
 from . import models
 from django.utils import timezone
+from django.core.paginator import  Paginator
 
 
 def Index(request):
@@ -49,6 +50,7 @@ def services(request):
     return render(request, 'sda/services.html', context)
 
 def dept_inside_activities(request):
+    category = models.Department_Category.objects.filter(category_name = 'Internal Activities')
     dept = models.Department.objects.filter(department_category = 'Internal Activities')
     leaders = models.Leaders_Department.objects.order_by('id')[:2]
     ann = models.Announcement.objects.order_by('-publication_date')[:10]
@@ -57,7 +59,8 @@ def dept_inside_activities(request):
         'dept':dept, 
         'leaders':leaders,
         'ann':ann,
-        'event':event
+        'event':event, 
+        'category': category
     }
     return render(request, 'sda/dept_inside_activities.html', context)
 
@@ -132,7 +135,11 @@ def search(request):
 
 def sermons(request):
     itemother = models.Sermons.objects.order_by('publication_date')[:4]
-    sermon = models.Sermons.objects.order_by('-publication_date')[:4]
+    #This handles the pagination in the sermons page
+    page_obj = models.Sermons.objects.order_by('-publication_date').all()
+    paginator = Paginator(page_obj, 4)
+    page_number = request.GET.get('page')
+    sermon = paginator.get_page(page_number)
     event = models.Event.objects.order_by('pub_date')[:5]
     context = {
         'sermon':sermon,

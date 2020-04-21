@@ -47,12 +47,25 @@
                 {% endfor %}
                 {% endif %}
                
-                <ul class="pager">
-                    <li class="previous"><a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next"><a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
+                
+                
+                    <ul class="pager">
+                        {% if sermon.has_previous %}
+                        <li class="previous"><a href="?page=1">&laquo; first</a>
+                            <a href = '?page={{sermon.previous_page_number}}'>previous</a>
+                        </li>
+                        {% endif %}
+                        <span class="current step-links">
+                            Page {{ sermon.number }} of {{ sermon.paginator.num_pages }}.
+                        </span>
+                        {% if sermon.has_next %}
+                            <li class="next">
+                                <a href = '?page={{sermon.paginator.num_pages}}'>Last</a>
+                                <a href="?page={{sermon.next_page_number}}">Next &raquo;</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                
 
             </div>
 

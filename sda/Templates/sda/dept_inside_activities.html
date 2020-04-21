@@ -6,18 +6,21 @@
     {% include './cn/header.html' %}
 
     <div class="container">
-
+        {% if category %}
+        
         <div class="row">
+            {% for cat in category %}
             <div class="col-lg-12">
-                <h1 class="page-header">Church Affairs:
-                    <small>Elmarld Benjamin</small>
+                <h1 class="page-header">{{cat.category_name}}:
+                    <small>{{cat.category_leader}}</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="{% url 'sda:index' %}">Home</a>
                     </li>
-                    <li class="active">Department of: Church Affairs</li>
+                    <li class="active">Department of: {{cat.category_name}}</li>
                 </ol>
             </div>
+            {% endfor %}
 
         </div>
 
@@ -28,28 +31,15 @@
                     <div class="col-sm-3">
                         <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
                     </div>
+                    {% for cat in category %}
                     <div class="col-sm-9">
                         <div class="media-body">
-                            <h4>Chair Person:</h4>
+                            <h4><em>Elder Incharge:</em>  {{cat.category_leader}}</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
                             <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 portfolio-item">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="media-body">
-                            <h4>Other Leader:</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                            <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -59,14 +49,12 @@
             <div class="col-md-6 portfolio-item">
                 <h3>What We Do ...</h3> 
                 <div class="list-group">
+                    {% for cat in category %}
                     <span class="list-group-item">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora error, molestiae illum sapiente velit, enim neque quidem qui? Ex quam ducimus laborum, ipsa cumque qui tenetur, inventore laboriosam obcaecati pariatur.
+                           {{cat.Category_role}}
                         </p>
-                        <p>
-                            Ipsum dolor sit amet, consectetur adipisicing elit. Unde expedita sunt, quasi a adipisci aspernatur reprehenderit, alias reiciendis nobis necessitatibus ea ratione autem. Eum necessitatibus, autem sint et voluptates animi. ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.
-                        </p>
-
+                     {% endfor %}
                     </span>
                 </div>
             </div>
@@ -81,7 +69,8 @@
                 </ul>
             </div>
         </div>
-        <hr>   
+        <hr>  
+        {% endif %} 
         <div class="row">
             <div class="col-lg-6">
                 {% if ann %}
@@ -136,7 +125,7 @@
                                             </div>
                                             <div class="col-sm-9">
                                                 <div class="media-body">
-                                                    <h4>{{lead.dpt_role | Upper}}: {{lead.user_id}}</h4>
+                                                    <h4>{{lead.dpt_role | upper}}: {{lead.user_id}}</h4>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
                                                     <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
                                                 </div>
