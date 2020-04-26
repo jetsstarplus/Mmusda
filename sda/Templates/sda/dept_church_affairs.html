@@ -6,50 +6,40 @@
     {% include './cn/header.html' %}
 
     <div class="container">
-
-        <div class="row">
+        {% if category %}        
+        <div class="row">            
             <div class="col-lg-12">
-                <h1 class="page-header">Church Affairs:
-                    <small>Elmarld Benjamin</small>
+                <h1 class="page-header">{{category.category_name}}:
+                    <small>{{cat.category_leader}}</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="{% url 'sda:index' %}">Home</a>
                     </li>
-                    <li class="active">Department of: Church Affairs</li>
+                    <li class="active">Department of: {{cat.category_name}}</li>
                 </ol>
-            </div>
-
+            </div>           
         </div>
-
         <div class="row">
             <h2 class="page-header">&nbsp;Leadership</h2>
-            <div class="col-md-6 portfolio-item">
+            <div class="col-md-11 portfolio-item">
                 <div class="row">
+                    {% if dpt_leader %} 
                     <div class="col-sm-3">
-                        <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
+                        <img class="media-object img-responsive" src="{{dpt_leader.profile_picture.url}}">
                     </div>
-                    <div class="col-sm-9">
-                        <div class="media-body">
-                            <h4>Chair Person:</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                            <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
+                    
+                    <div class="col-sm-7">
+                        <div class="media-body">                          
+                                 <h4><em>Elder Incharge:</em>  {{category.category_leader}}</h4>                            
+                                                       
+                                <p>{{category.Word_From_The_Leader}}</p>
+                        <hr />
+                                <p><strong>Contact: {{dpt_leader.contact}}</strong><br>
+                                    <strong>Email: {{dpt_leader.user.email}}</strong></p>                     
+                            
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 portfolio-item">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="media-body">
-                            <h4>Other Leader:</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                            <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
-                        </div>
-                    </div>
+                    {% endif %}                    
                 </div>
             </div>
         </div>
@@ -58,15 +48,11 @@
         <div class="row">
             <div class="col-md-6 portfolio-item">
                 <h3>What We Do ...</h3> 
-                <div class="list-group">
+                <div class="list-group">                    
                     <span class="list-group-item">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora error, molestiae illum sapiente velit, enim neque quidem qui? Ex quam ducimus laborum, ipsa cumque qui tenetur, inventore laboriosam obcaecati pariatur.
+                           {{category.Category_role}}
                         </p>
-                        <p>
-                            Ipsum dolor sit amet, consectetur adipisicing elit. Unde expedita sunt, quasi a adipisci aspernatur reprehenderit, alias reiciendis nobis necessitatibus ea ratione autem. Eum necessitatibus, autem sint et voluptates animi. ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.
-                        </p>
-
                     </span>
                 </div>
             </div>
@@ -81,7 +67,9 @@
                 </ul>
             </div>
         </div>
-        <hr>   
+        <hr>  
+        {% endif %} 
+
         <div class="row">
             <div class="col-lg-6">
                 {% if ann %}
@@ -120,30 +108,44 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="accordion" data-parent="#accordion" href="#accordion">{{dpt.department_name}}</a>
+                                <a data-toggle="accordion" data-parent="#{{dpt.department_name}}" href="#{{dpt.department_name}}">{{dpt.department_name}}</a>
                             </h4>
                         </div>
                         <div id="collapse1" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <div class="row">
                                     <h2 class="page-header">&nbsp;Leadership</h2>
-                                    {% if leaders %}
+                                    {% if leaders%}
                                     {% for lead in leaders %}
-                                    <div class="col-md-6 portfolio-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <img class="media-object img-responsive pull-left" src="{% static 'sda/img/1.jpg' %}">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="media-body">
-                                                    <h4>{{lead.dpt_role}}: {{lead.user_id}}</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                                    <p><strong>Contact:0700123456</strong><br><strong>Email:youare@gmail.com</strong></p>
+                                        
+                                        {% ifequal  lead.dept_id.id dpt.id %}
+                                            <div class="col-md-6 portfolio-item">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <img class="media-object img-responsive pull-left" src="{{lead.user_id.profile_picture.url}}">
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="media-body">
+                                                            <h4>{{lead.dpt_role | upper}}: {{lead.user_id}}</h4>
+                                                            <p>{{lead.Words_From_The_Leader}}</p>
+                                                            <p>
+                                                                <strong>Contact: {{lead.user_id.contact}}</strong><br>
+                                                                <strong>Email: {{lead.user_id.user.email}}</strong>
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        {% endifequal %}
+                                    {% empty %}
+                                    <div class="row">
+                                        
+                                        <div class="col-sm-8">
+                                            <div class="media-body">
+                                                <h4 class = 'red'>This department has no assigned leader</h4>
+                                               </div>
                                         </div>
                                     </div>
-                                    
                                     {% endfor %}
                                     {% endif%}
                                    

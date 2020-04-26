@@ -50,56 +50,82 @@ def services(request):
     return render(request, 'sda/services.html', context)
 
 def dept_inside_activities(request):
-    category = models.Department_Category.objects.filter(category_name = 'Internal Activities')
-    dept = models.Department.objects.filter(department_category = 'Internal Activities')
-    leaders = models.Leaders_Department.objects.order_by('id')[:2]
+    category = models.Department_Category.objects.get(category_name = 'Internal Activities')
+    dept = models.Department.objects.filter(department_category = category.category_name)
+    leaders = models.Leaders_Department.objects.all()
     ann = models.Announcement.objects.order_by('-publication_date')[:10]
     event = models.Event.objects.order_by('-pub_date')[:10]
+
+    #checking to the category of and justifying    
+    dpt_leader = models.Church_Member.objects.get(id = category.category_leader.id)
+
     context = {
         'dept':dept, 
         'leaders':leaders,
         'ann':ann,
         'event':event, 
-        'category': category
+        'category': category, 
+        'dpt_leader':dpt_leader
     }
     return render(request, 'sda/dept_inside_activities.html', context)
 
 def dept_members_welfare(request):
-    dept = models.Department.objects.filter(department_category = 'Members Welfare')
-    leaders = models.Leaders_Department.objects.order_by('id')[:2]
+    category = models.Department_Category.objects.get(category_name = 'Members Welfare')
+    dept = models.Department.objects.filter(department_category = category.category_name)
+    leaders = models.Leaders_Department.objects.all()
     ann = models.Announcement.objects.order_by('-publication_date')[:10]
     event = models.Event.objects.order_by('-pub_date')[:10]
+
+    #checking to the category of and justifying    
+    dpt_leader = models.Church_Member.objects.get(id = category.category_leader.id)
+
     context = {
         'dept':dept, 
         'leaders':leaders,
         'ann':ann,
-        'event':event
+        'event':event, 
+        'category': category, 
+        'dpt_leader':dpt_leader
     }
     return render(request, 'sda/dept_members_welfare.html', context)
 
 def dept_church_affairs(request):
-    dept = models.Department.objects.filter(department_category = 'Church Affairs')
-    leaders = models.Leaders_Department.objects.order_by('id')[:2]
+    category = models.Department_Category.objects.get(category_name = 'Church Affairs')
+    dept = models.Department.objects.filter(department_category = category.category_name)
+    leaders = models.Leaders_Department.objects.all()
     ann = models.Announcement.objects.order_by('-publication_date')[:10]
     event = models.Event.objects.order_by('-pub_date')[:10]
+
+    #checking to the category of and justifying    
+    dpt_leader = models.Church_Member.objects.get(id = category.category_leader.id)
+
     context = {
         'dept':dept, 
         'leaders':leaders,
         'ann':ann,
-        'event':event
+        'event':event, 
+        'category': category, 
+        'dpt_leader':dpt_leader
     }
     return render(request, 'sda/dept_church_affairs.html', context)
 
 def dept_ministries_outreach(request):
-    dept = models.Department.objects.filter(department_category = 'Ministry & Outreach')
-    leaders = models.Leaders_Department.objects.order_by('id')[:2]
+    category = models.Department_Category.objects.get(category_name = 'Ministry & Outreach')
+    dept = models.Department.objects.filter(department_category = category.category_name)
+    leaders = models.Leaders_Department.objects.all()
     ann = models.Announcement.objects.order_by('-publication_date')[:10]
     event = models.Event.objects.order_by('-pub_date')[:10]
+
+    #checking to the category of and justifying    
+    dpt_leader = models.Church_Member.objects.get(id = category.category_leader.id)
+
     context = {
         'dept':dept, 
         'leaders':leaders,
         'ann':ann,
-        'event':event
+        'event':event, 
+        'category': category, 
+        'dpt_leader':dpt_leader
     }
     return render(request, 'sda/dept_ministries_outreach.html', context)
 
@@ -111,8 +137,7 @@ def announcements(request):
     context = {
         'ann': ann,
         'sub':sub,
-        'ann2':ann2,
-       
+        'ann2':ann2,       
     }
     return render(request, 'sda/announcements.html', context)
 
@@ -207,5 +232,8 @@ class FAQView(generic.ListView):
     """Returning the  last faq"""
     def get_queryset(self):
         return models.faq.objects.order_by('-pub_date')[:10]
+
+def pricing(request):
+    return render(request, 'sda/pricing.html')
     
 # Create your views here.

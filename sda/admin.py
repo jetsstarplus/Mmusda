@@ -41,15 +41,19 @@ class DepartmentCategory(admin.ModelAdmin):
     fieldsets = [
         ('Category Name', {'fields': ['category_name']}),
         (None, {'fields': ['Category_role']}),
-        (None, {'fields': ['category_leader']})
+        (None, {'fields': ['category_leader']}), 
+        (None, {'fields': ['Word_From_The_Leader']})
     ]
+    
+
 admin.site.register(models.Department_Category, DepartmentCategory)
 
 # #Church Leaders Admin Presentation
 class ChurchLeadersAdmin(admin.ModelAdmin):
 
-    list_display = ('full_name','contact', 'profile', 'is_leader')
-    search_fields = ['full_name']
+    list_display = ('profile','full_name','contact',  'is_leader')
+    list_display_links = ['full_name']
+    search_fields = ['user']
     fieldsets = [
         ('User', {'fields': ['user']}), 
         ('Phone Number', {'fields':['contact']}), 
@@ -62,7 +66,7 @@ class ChurchLeadersAdmin(admin.ModelAdmin):
 
      
     def profile(self, obj):
-        return mark_safe('<img src = "{url}" width = "50px" height = "50px"/>'.format(
+        return mark_safe('<img src = "{url}" width = "60px" height = "50px"/>'.format(
             url = obj.profile_picture.url,
              )
         )

@@ -4,7 +4,8 @@
         <footer>
             <div class="row">
                 <div class="col-md-6">
-                    <p>Copyright &copy; Multimedia University of Kenya SDA 2020</p>
+                    {% now "Y" as current_year %}
+                    <p>Copyright &copy; Multimedia University of Kenya SDA {{current_year}}</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="nav nav-pills pull-left">

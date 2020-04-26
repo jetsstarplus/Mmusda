@@ -20,11 +20,9 @@ class Church_Member(models.Model):
 
     full_names.short_description = 'Full Name'
     full_names.admin_order_field = 'leader_last_name'
-
     full_name = property(full_names)
 
-    def __str__(self):
-       
+    def __str__(self):       
         return self.full_name
         
     class Meta:
@@ -43,6 +41,7 @@ class Department_Category(models.Model):
     category_name =  models.CharField(max_length = 50, choices = choice)
     Category_role = models.TextField()
     category_leader = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
+    Word_From_The_Leader = models.TextField(blank = True)
     publication_date = models.DateTimeField('Date Published', default = timezone.now)
    
 
@@ -382,10 +381,10 @@ class Leaders_Department(models.Model):
         
         ]
 
-
         user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
         dept_id = models.ForeignKey(Department, on_delete = models.CASCADE)
         dpt_role = models.CharField(max_length = 30, choices = DEPARTMENTS, default = 'Family')
+        Words_From_The_Leader = models.TextField(blank = True)
         dpt_rate = models.IntegerField()
 
         class Meta:
@@ -404,6 +403,7 @@ class Leaders_Family(models.Model):
 
         user_id = models.ForeignKey(Church_Member, on_delete = models.CASCADE)
         family = models.ForeignKey(Family, on_delete = models.CASCADE)
+        Words_From_The_Leader = models.TextField(blank = True)
         fam_role = models.CharField(max_length = 30, choices = FAMILY, default = 'Child')
 
         class Meta:
