@@ -56,16 +56,26 @@
                     </span>
                 </div>
             </div>
+            {% if dept %}
             <div class="col-md-6 portfolio-item">
                 <h3>Our Team</h3>
                 <ul class="list-group">
-                    <li class="list-group-item">Lawrence Kamau</li>
-                    <li class="list-group-item">Lawrence Kamau</li>
-                    <li class="list-group-item">Lawrence Kamau</li>
-                    <li class="list-group-item">Lawrence Kamau</li>
-                    <li class="list-group-item">Lawrence Kamau</li>
+                    {% for dpt in dept %}
+                        {% if leaders %}
+                            {% for lead in leaders %}
+                                {% ifequal lead.dept_id.id dpt.id %}
+                                    <li class="list-group-item">{{lead.user_id}}</li>
+                                {% endifequal%}
+                            {% empty %}
+                                <p>No leaders assigned in this category</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% empty %}
+                        <p>There are no members in this category</p>
+                   {% endfor %}
                 </ul>
             </div>
+            {% endif %}
         </div>
         <hr>  
         {% endif %} 

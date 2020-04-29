@@ -1,57 +1,66 @@
 {% load static %}
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height: 80px">
+<nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top"  style="height: 80px">
     <div class="container">
-        <div class="navbar-header contain">
-            <button type="button" class="navbar-toggle but" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-            <a class="navbar-brand anchor" href="{% url 'sda:index' %}" >
-                <img src="{% static 'sda/img/adventist-Logo.png' %}" style="width: 60px; border-radius:2px;">
-                Multimedia University
-            </a>
-        </div>
-
+         <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+         <a class="navbar-brand" href="{% url 'sda:index' %}" >
+            <img src="{% static 'sda/img/adventist-Logo.png' %}" width="60" height="60" class="d-inline-block align-top" alt="">
+            Multimedia University
+        </a>
+    
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style= 'color:lightgrey'></span>
+        </button>
+                
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse" style="padding-top: 1em background-color: #000">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'sda:index' %}">Home</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav mr-auto navbar-right">
+                <li class = "nav-item"><a href="{% url 'sda:index' %}" class = "nav-link">Home</a>
                 </li>
-                <li><a href="{%url 'sda:services'  %}">Services</a>
+                <li class = "nav-item"><a href="{%url 'sda:services'  %}" class ="nav-link" >Services</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Departments <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href=" {% url 'sda:dept_inside_activities' %}">Internal Activities</a><!-- Lawrence Kamau -->
-                        </li>
-                        <li><a href="{% url 'sda:dept_members_welfare' %}">Members Welfare</a><!-- Edwin Oloo -->
-                        </li>
-                        <li><a href="{% url 'sda:dept_church_affairs' %}">Church Affairs</a><!-- Elmard Benjamin -->
-                        </li>
-                        <li><a href="{% url 'sda:dept_ministries_outreach' %}">Ministries &amp; Outreach</a> <!-- Patric Ndung'u -->
-                        </li>
-                        
-                    </ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Departments
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'sda:dept_inside_activities' %}">Internal Activities</a>
+                             <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'sda:dept_members_welfare' %}">Members Welfare</a>
+                             <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'sda:dept_church_affairs' %}">Church Affairs</a>
+                             <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'sda:dept_ministries_outreach' %}">Ministries &amp; Outreach</a>
+                      </div>
+                    
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activities <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'sda:announcements' %}">Announcements</a></li>
-                        <li><a href="{% url 'sda:sermons' %}">Sermons</a></li>
-                        <li><a href="{% url 'sda:timeline' %}">Timeline</a></li>
-                    </ul>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Activities
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'sda:announcements' %}">Announcements</a>
+                             <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'sda:sermons' %}">Sermons</a>
+                             <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'sda:timeline' %}">Timeline</a>
+                          
+                      </div>                    
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'sda:about' %}">About</a></li>
-                        <li><a href="{% url 'sda:contact' %}">Contact</a></li>
-                    </ul>
+               
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        More
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'sda:about' %}">About</a>
+                             <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'sda:contact' %}">Contact</a>
+                             
+                      </div>                    
                 </li>
-                <li><a href="{% url 'mission:home' %}">Mission</a></li>
+               
+                <li><a class = "nav-link" href="{% url 'mission:home' %}">Mission</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

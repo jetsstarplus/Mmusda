@@ -39,6 +39,13 @@
                     <div class="embed-responsive">
                         <iframe width="750" height="315" src="{{speach.sermon_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
+                    
+                    <!-- 16:9 aspect ratio -->
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{speach.sermon_link}}" allowfullscreen></iframe>
+                    </div>
+                    
+                   
                     <hr>
                     <p style = "width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{speach.sermon_info}}</p>
                     <a class="btn btn-primary" href="{% url 'sda:sermon' speach.id %}">Read More <i class="fa fa-angle-right"></i></a>

@@ -32,9 +32,12 @@
                     <p><i class="fa fa-clock-o"></i> Posted on {{item.publication_date}}<!--a href="#">Start Boostrap</a>-->
                     </p>
                     <hr>
-                    <div class="embed-responsive">
-                        <iframe width="750" height="315" src="{{item.sermon_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    
+                     <!-- 4:3 aspect ratio -->
+                     <div class="embed-responsive embed-responsive-4by3">
+                        <iframe class="embed-responsive-item" src="{{item.sermon_link}}" allowfullscreen></iframe>
                     </div>
+                    
                     <hr>
                     <p>{{item.sermon_info}}</p>
                     <p><strong>{{item.sermon_title}}</strong>

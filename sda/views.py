@@ -92,7 +92,7 @@ def dept_members_welfare(request):
 def dept_church_affairs(request):
     category = models.Department_Category.objects.get(category_name = 'Church Affairs')
     dept = models.Department.objects.filter(department_category = category.category_name)
-    leaders = models.Leaders_Department.objects.all()
+    leaders = models.Leaders_Department.objects.all()[:2]
     ann = models.Announcement.objects.order_by('-publication_date')[:10]
     event = models.Event.objects.order_by('-pub_date')[:10]
 
@@ -202,8 +202,8 @@ def timeline(request):
 #it renders the about Page to the site
 def about(request):
     about = models.About.objects.order_by('-pub_date')[:2]
-    leader = models.Church_Member.objects.filter(is_leader = True)[:8]
-    family = models.Family.objects.exclude(family_name = 'All')
+    leader = models.Leaders_Department.objects.all()[:8]
+    family = models.Leaders_Family.objects.exclude(family = 2)
     famLeader = models.Leaders_Family.objects.all()
     context = {
          'about': about,
