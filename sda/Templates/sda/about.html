@@ -48,22 +48,35 @@
             {% for lead in leader %}
             <div class="col-sm-4">
                 <img class="img-responsive img-full-width img-thumbnail" src="{{lead.user_id.profile_picture.url}}">
-                <h3>{{lead.user_id}}
-                    <small>{{lead.dpt_role | upper}}  :  {{lead.dept_id}}</small>
-                </h3>
-                <p>Reach to this leader?</p>
-                <div class = 'row'>
-                    <h5 class = 'col-md-3'>Contact</h5>
-                     <a class = 'col-md-5' href = "call:{{lead.user_id.contact}}">{{lead.user_id.contact}}</a>
-                </div>
-                                     
-                     <div class = 'row'>
-                        <h5 class = 'col-md-3'>Email: </h5>
-                             <a href="mailto:{{lead.user_id.user.email}}">{{lead.user_id.user.email}}</a>
-                        
-                     </div>
-                     
-                <p>{{lead.Words_From_The_Leader}}</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="3">
+                                <h3>{{lead.user_id}}
+                                    <small>{{lead.dpt_role | upper}}  :  {{lead.dept_id}}</small>
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><p>Reach to this leader?</p></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h5>Contact</h5></td><td><b>:</b></td>
+                            <td><a href = "call:{{lead.user_id.contact}}">{{lead.user_id.contact}}</a></td>
+                        </tr>
+                                        
+                        <tr>
+                            <td><h5>Email </h5></td><td><b>:</b></td>
+                            <td><a href="mailto:{{lead.user_id.user.email}}">{{lead.user_id.user.email}}</a></td>
+                            
+                        <tr>
+                        <tr>
+                            <td colspan="3"><p>{{lead.Words_From_The_Leader}}</p></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             {% endfor %}
             {% endif %}
@@ -81,24 +94,38 @@
 
             {% for fam in family %}
 
-            <div class="col-md-2 col-xs-10">
-                <img class="img-responsive img-customer img-circle" src="{{fam.family.family_profile.url}}">
-                <p>{{fam.family}}</p>
-                <p>Reach to the Mom Or Dad?</p>
-                    <div class = 'row'>
-                        <h5 class = 'col-md-3'>Contact</h5>
-                        <a class = 'col-md-5' href = "call:{{fam.user_id.contact}}">{{fam.user_id.contact}}</a>
-                    </div>
-                                     
-                     <div class = 'row'>
-                        <h5 class = 'col-md-3'>Email: </h5>
-                             <a href="mailto:{{fam.user_id.user.email}}">{{fam.user_id.user.email}}</a>
-                        
-                     </div>
-                    
-                <p>{{fam.family.inspiration}}</p>
-
+            <div class="col-md-3 col-xs-10">
+                <div style="text-align: center;">
+                    <img class="img-responsive img-customer img-circle" width = "130px" src="{{fam.family.family_profile.url}}">
+                </div>
                 
+                <table>
+                    <thead>
+                        <tr>
+                            <td><h4><em>{{fam.family | upper}}</em></h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>Reach the parent</p></td>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td><h5>Contact</h5></td>
+                            <td><a href = "call:{{fam.user_id.contact}}">{{fam.user_id.contact}}</a></td>
+                        </tr>
+                                        
+                        <tr>
+                            <td><h5>Email: </h5></td>
+                            <td><a href="mailto:{{fam.user_id.user.email}}">{{fam.user_id.user.email}}</a></td>
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p>{{fam.family.inspiration}}</p></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             {% endfor %}
 

@@ -4,15 +4,15 @@
          <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
          <a class="navbar-brand" href="{% url 'sda:index' %}" >
             <img src="{% static 'sda/img/adventist-Logo.png' %}" width="60" height="60" class="d-inline-block align-top" alt="">
-            Multimedia University
+            <span>Multimedia University</span>
         </a>
     
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style= 'color:lightgrey'></span>
+        <button class="navbar-toggler menu-toggler " style = 'background-color:transparent' type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars" style= 'color:white; font-size:large'></i>
         </button>
                 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <nav class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="nav navbar-nav mr-auto navbar-right">
                 <li class = "nav-item"><a href="{% url 'sda:index' %}" class = "nav-link">Home</a>
                 </li>
@@ -62,7 +62,7 @@
                
                 <li><a class = "nav-link" href="{% url 'mission:home' %}">Mission</a></li>
             </ul>
-        </div>
+        </nav>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->

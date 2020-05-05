@@ -14,6 +14,11 @@ html, body {
 /*
 dding for fixed top nav */
 
+.menu-toggler
+{
+  display: none;
+  visibility: hidden;
+}
 
 .img-home-p
 body {
@@ -198,5 +203,14 @@ footer {
   }
 
   
+  
 
+}
+
+
+@media (max-width: 1024px){
+  .menu-toggler{
+    visibility: visible;
+    display: inline;
+  }
 }
