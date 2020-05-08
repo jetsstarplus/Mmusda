@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\poll"
+		},
+		{
+			"path": "..\\..\\django1"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "..\\..\\todo"
+		},
+		{
+			"path": "..\\..\\django_forms"
+		},
+		{
+			"path": "..\\..\\testform"
+		}
+	],
+	"settings": {}
+}
