@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 {% include './cn/head.html' %} 
 
 <body>
@@ -29,18 +30,18 @@
               <p>{{cont.content | truncatechars:450}}</p>
             {% endfor %}
           {% endif %}
-			<!-- <?php  
+			
+          {% if message %} 
+              <div class="alert alert-success">{{message}}</div>
+          {% else %}    
+               <div class="alert alert-danger"><p>There Was an error in sending your message, Please send again</p></div>
+          {% endif %}  
 
-                // check for a successful form post  
-                if (isset($_GET['s'])) echo "<div class=\"alert alert-success\">".$_GET['s']."</div>";  
-          
-                // check for a form error  
-                elseif (isset($_GET['e'])) echo "<div class=\"alert alert-danger\">".$_GET['e']."</div>";  
-
-			?> -->
-            <form role="form" method="POST" action="#">
+            <form role="form" method="POST" action="/contact/">
 	            <div class="row">
-	              <div class="form-group col-lg-4">
+                {% csrf_token %}
+                {{ form | crispy}}
+	              <!-- <div class="form-group col-lg-4">
 	                <label for="input1">Name</label>
 	                <input type="text" name="contact_name" class="form-control" id="input1">
 	              </div>
@@ -56,7 +57,7 @@
 	              <div class="form-group col-lg-12">
 	                <label for="input4">Message</label>
 	                <textarea name="contact_message" class="form-control" rows="6" id="input4"></textarea>
-	              </div>
+	              </div> -->
 	              <div class="form-group col-lg-12">
 	                <input type="hidden" name="save" value="contact">
 	                <button type="submit" class="btn btn-primary">Submit</button>

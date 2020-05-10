@@ -61,7 +61,7 @@ class ChurchLeadersAdmin(admin.ModelAdmin):
         (None, {'fields': ['is_leader']}), 
         (None, {'fields': ['profile_picture']})
     ]
-
+    autocomplete_fields = ['user']
     inlines = [DptInline, FamInline]
 
      
@@ -104,7 +104,7 @@ class Scripture(admin.ModelAdmin):
     date_heirarchy = ['pub_date']
     fieldsets = [
         ('Scripture Theme', {'fields': ['scripture_title']}),
-        ('Scripture', {'fields' : ['Scripture_content']}),
+        ('Scripture', {'fields' : ['scripture_content']}),
         ('Attached Verses', {'classes' : ['extrapretty'],'fields' : ['attached_verses']}),
         ('Date Published', {'classes': ['extrapretty'], 'fields' : ['pub_date']}),
         
@@ -116,6 +116,7 @@ class Scripture(admin.ModelAdmin):
     search_fields = ['Scripture_title']
     list_display = ('scripture_title',  'attached_verses' , 'user_id', 'status', 'was_published_recently')
     actions = ['make_invisible', 'make_visible']
+    autocomplete_fields = ['user_id']
 
     # This action is used to show change the state of the
     #  Scripture content and so as to make it more
@@ -267,6 +268,7 @@ class announcement(admin.ModelAdmin):
     list_filter = ['announcement_due_date', 'announcement_classification', 'publication_date']
     search_fields = ['announcement_due_date', 'announcement_title']
     list_display = ['announcement_title', 'is_date_due', 'created_by', 'was_published_recently', 'announcement_classification']
+    autocomplete_fields = ['user_id']
 
 admin.site.register(models.Announcement, announcement)
 
@@ -401,6 +403,21 @@ class Personal_Contact(admin.ModelAdmin):
     list_filter = ['pub_date']
     search_fields = ['Name']
     list_display = ['Name', 'email', 'contact', 'status', 'was_published_recently']
+    actions = ['make_viewed']
+    readonly_fields = ('Name', 'email', 'contact', 'was_published_recently', 'message')
+
+    #the function that handles the change in status of the message
+    def make_viewed(self, request, queryset):
+        rowsupdated = queryset.update(status = True)
+        if(rowsupdated == 1):
+            message_bit = "1 Contact Was"
+        else:
+            message_bit = "%s Contacts Were " %rowsupdated
+
+        self.message_user(request, "%s Succesfully Marked Viewed" %message_bit)
+
+    make_viewed.short_description = "Mark the Selected Contact as Viewed"
+
 
 admin.site.register(models.Personal_Contact, Personal_Contact )
 # Register your models here.

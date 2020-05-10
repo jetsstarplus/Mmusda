@@ -4,6 +4,7 @@ from django.views import generic
 from . import models
 from django.utils import timezone
 from django.core.paginator import  Paginator
+from . import forms
 
 
 def Index(request):
@@ -218,8 +219,24 @@ def about(request):
 def contact(request):
     # if request.method == 'POST'    
     contact = models.contact.objects.order_by('-pub_date')[:1]
+    
+    #checking the request method
+    if request.method == 'POST':
+        form = forms.Contact(request.POST)
+
+        #Triggering the submission of the form
+        if form.is_valid:
+           form.save()
+           message = "Your Message Was Sent Successfully"
+
+    #else it will return an empty form
+    else:
+        form = forms.Contact()
+        message = "Hello You can send us a message"
     context = {
-        'contact':contact
+        'contact':contact, 
+        'form':form, 
+        'message':message
     }
     return render(request, 'sda/contact.html', context)
 
