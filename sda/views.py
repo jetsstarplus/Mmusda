@@ -7,6 +7,7 @@ from django.core.paginator import  Paginator
 from . import forms
 
 
+
 def Index(request):
     scripture = models.Scripture.objects.order_by('-pub_date')[:1]
     visitor_word = models.visitor_word.objects.order_by('-pub_date')[:1]
@@ -133,30 +134,27 @@ def dept_ministries_outreach(request):
 def announcements(request):
     ann = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:4]
     ann2 = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:1]
-    sub = models.Announcement.objects.filter(announcement_classification__startswith = 'Sub')[:5]
+   
+    #Ensuring on the method of the http response, Checking if the response is POST
+    if request.method == 'POST':
+        form = forms.AnnSearchForm(request.POST)
 
+        #Ensuring all the fields are right
+        if form.is_valid():
+            item = form.cleaned_data['Search_Item']
+            search = models.Announcement.objects.filter(announcement_title = item)
+
+    #if the http response is GET then this would run
+    else:
+        form = forms.AnnSearchForm()
+        search = models.Announcement.objects.filter(announcement_classification__startswith = 'Sub')[:5]
     context = {
         'ann': ann,
-        'sub':sub,
-        'ann2':ann2,       
+        'ann2':ann2,
+        'form': form, 
+        'search':search    
     }
     return render(request, 'sda/announcements.html', context)
-
-def search(request):
-
-    if request.method == "GET":
-        form = request.GET.get('search')
-        if form.is_valid():
-            ann = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:4]
-            ann2 = models.Announcement.objects.filter(announcement_classification__startswith = 'Announcement')[:1]
-            sub = models.Announcement.objects.filter(announcement_title__icontains = form)[:5]
-
-            context = {
-                'ann': ann,
-                'sub':sub,
-                'ann2':ann2,
-            }
-    return render(request, 'sda/search.html', context)
 
 
 def sermons(request):
@@ -167,10 +165,27 @@ def sermons(request):
     page_number = request.GET.get('page')
     sermon = paginator.get_page(page_number)
     event = models.Event.objects.order_by('pub_date')[:5]
+
+    # Handling the search form data in the sermons page
+    if request.method == 'POST':
+        form = forms.AnnSearchForm(request.POST)
+
+        #Ensuring all the fields are right
+        if form.is_valid():
+            item = form.cleaned_data['Search_Item']
+            search = models.Sermons.objects.filter(sermon_title= item)
+
+    #if the http response is GET then this would run
+    else:
+        form = forms.AnnSearchForm()
+        search = ''
+
     context = {
         'sermon':sermon,
         'itemother':itemother,
-        'event':event
+        'event':event,
+        'search':search, 
+        'form': form
     }
     return render(request, 'sda/sermons.html', context)
 
@@ -225,9 +240,12 @@ def contact(request):
         form = forms.Contact(request.POST)
 
         #Triggering the submission of the form
-        if form.is_valid:
-           form.save()
-           message = "Your Message Was Sent Successfully"
+        if form.is_valid():
+            if form.has_changed():
+                form.save()
+                message = "Your Message Was Sent Successfully"
+            else:
+                message = "You had already sent the message"
 
     #else it will return an empty form
     else:

@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 {% include './cn/head.html' %} 
 
 <body>
@@ -54,7 +55,7 @@
                 {% endfor %}
                 {% endif %}
                
-                
+                <!-- Handling the pagination for multiple posted sermons and updates -->
                 
                     <ul class="pager">
                         {% if sermon.has_previous %}
@@ -76,18 +77,40 @@
 
             </div>
 
+            <!-- The search form -->
             <div class="col-lg-4">
                 <div class="well">
-                    <h4>Search Item</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
+                    <form role = 'form' action = /sermons/ method = 'POST'>
+                        {% csrf_token %}
+                        <h4>Search In Sermons</h4>
+                        <div class="input-group">                            
+                            {{form | crispy}}
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                     <!-- /input-group -->
                 </div>
+
+                <!-- The search data output location in the page -->
+                {% if search %}
+                <div class="well">
+                    <h4>Search Results </h4>
+                    <ul class="list-group">
+                        
+                        <ul class="list-group">
+                            {% for itm in search %}
+                                <li class="list-group-item"><a href="{% url 'sda:sermon' itm.id %}">{{itm.sermon_title}}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </ul>
+                </div>
+
+                {% endif %}
+
                 <!-- /well -->
                 <div class="well">
                     <h4>Popular Videos</h4>
