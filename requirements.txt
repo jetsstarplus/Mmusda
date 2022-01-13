@@ -10,7 +10,7 @@ idna==2.9
 mysqlclient==1.4.6
 nltk==3.4.5
 pdf2image==1.13.1
-Pillow==7.1.1
+Pillow==9.0.0
 pyodbc==4.0.25
 pyPdf==1.13
 PyPDF2==1.26.0
